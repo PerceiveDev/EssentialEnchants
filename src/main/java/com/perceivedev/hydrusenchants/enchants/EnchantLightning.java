@@ -3,6 +3,7 @@ package com.perceivedev.hydrusenchants.enchants;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 
@@ -20,6 +21,13 @@ public class EnchantLightning extends Enchant {
         super(ProjectileLaunchEvent.class, ProjectileHitEvent.class);
         registerEventHandler(ProjectileLaunchEvent.class, e -> {
             ProjectileLaunchEvent event = (ProjectileLaunchEvent) e;
+            if (!(event.getEntity().getShooter() instanceof Player)) {
+                return;
+            }
+            Player p = (Player) event.getEntity().getShooter();
+            if (!isEnchanted(p.getInventory().getItemInMainHand()) && !isEnchanted(p.getInventory().getItemInOffHand())) {
+                return;
+            }
             Markers.set(event.getEntity(), getIdentifier());
         });
         registerEventHandler(ProjectileHitEvent.class, e -> {
