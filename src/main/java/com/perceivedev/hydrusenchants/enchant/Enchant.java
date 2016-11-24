@@ -3,6 +3,7 @@ package com.perceivedev.hydrusenchants.enchant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.bukkit.Material;
 import org.bukkit.event.Event;
@@ -69,6 +70,17 @@ public abstract class Enchant implements Listener, EventExecutor {
         Enchants enchants = Enchants.load(item.getItemMeta().getLore());
 
         return enchants.get(this) != -1;
+    }
+
+    public void registerEventHandler(Class<? extends Event> eventClass, EventHandler handler) {
+        Objects.requireNonNull(eventClass, "eventClass can not be null");
+        Objects.requireNonNull(handler, "handler can not be null");
+        if (eventHandlers.get(eventClass) != null) {
+            HydrusEnchants.getInstance().getLogger().warning(
+                    "Attempted to register EventHandler for the event '" + eventClass.getSimpleName() + "' in the '" + getClass().getSimpleName() + "' enchantment, but one was already present!");
+            return;
+        }
+        eventHandlers.put(eventClass, handler);
     }
 
     @Override

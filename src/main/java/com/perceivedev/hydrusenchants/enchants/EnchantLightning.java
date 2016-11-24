@@ -8,6 +8,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import com.perceivedev.hydrusenchants.ItemType;
 import com.perceivedev.hydrusenchants.enchant.Enchant;
+import com.perceivedev.hydrusenchants.util.Markers;
 
 /**
  * @author Rayzr
@@ -17,6 +18,17 @@ public class EnchantLightning extends Enchant {
 
     public EnchantLightning() {
         super(ProjectileLaunchEvent.class, ProjectileHitEvent.class);
+        registerEventHandler(ProjectileLaunchEvent.class, e -> {
+            ProjectileLaunchEvent event = (ProjectileLaunchEvent) e;
+            Markers.set(event.getEntity(), getIdentifier());
+        });
+        registerEventHandler(ProjectileHitEvent.class, e -> {
+            ProjectileHitEvent event = (ProjectileHitEvent) e;
+            if (!Markers.get(event.getEntity(), getIdentifier())) {
+                return;
+            }
+            event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+        });
     }
 
     /*
