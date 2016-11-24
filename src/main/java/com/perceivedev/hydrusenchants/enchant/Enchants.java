@@ -24,7 +24,7 @@ public class Enchants {
      * 
      * @param lore the lore
      */
-    public Enchants(List<String> lore) {
+    private Enchants(List<String> lore) {
         this.lore = lore;
         loadEnchants();
     }
