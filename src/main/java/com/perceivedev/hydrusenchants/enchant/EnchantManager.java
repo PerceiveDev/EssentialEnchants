@@ -10,6 +10,7 @@ import com.perceivedev.hydrusenchants.HydrusEnchants;
  *
  */
 public class EnchantManager {
+
     private Map<String, Enchant> enchants = new LinkedHashMap<>();
 
     @SuppressWarnings("unused")
@@ -27,5 +28,14 @@ public class EnchantManager {
      */
     public void registerEnchant(Enchant enchant) {
         enchants.put(enchant.getIdentifier(), enchant);
+    }
+
+    /**
+     * @param identifier the {@link Enchant#getIdentifier() identifier} of the
+     *            {@link Enchant enchant}.
+     * @return
+     */
+    public Enchant getEnchant(String identifier) {
+        return enchants.get(identifier);
     }
 }

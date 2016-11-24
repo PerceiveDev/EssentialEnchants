@@ -18,6 +18,10 @@ public class TextUtils {
         return output.toString();
     }
 
+    public static String unhideText(String input) {
+        return input.replace("" + ChatColor.COLOR_CHAR, "");
+    }
+
     // @formatter:off
     public static int unnumeral(String number) {
         if (number.startsWith("M")) return 1000 + unnumeral(number.replaceFirst("M", ""));
