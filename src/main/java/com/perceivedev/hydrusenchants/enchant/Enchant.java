@@ -26,9 +26,9 @@ public abstract class Enchant implements Listener, EventExecutor {
 
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
+        HydrusEnchants.getInstance().getEnchantManager().registerEnchant(this);
         HydrusEnchants.getInstance().getEventManager().add(this, targetEvents);
 
-        // TODO: Allow adding event handlers
         for (Class<? extends Event> eventClass : targetEvents) {
             eventHandlers.put(eventClass, null);
         }
@@ -75,6 +75,11 @@ public abstract class Enchant implements Listener, EventExecutor {
     public void registerEventHandler(Class<? extends Event> eventClass, EventHandler handler) {
         Objects.requireNonNull(eventClass, "eventClass can not be null");
         Objects.requireNonNull(handler, "handler can not be null");
+        if (!eventHandlers.containsKey(eventClass)) {
+            HydrusEnchants.getInstance().getLogger().warning(
+                    "Attempted to register EventHandler for the event '\" + eventClass.getSimpleName() + \"' in the '\" + getClass().getSimpleName() + \"' enchantment, but it was not one of the target events!");
+            return;
+        }
         if (eventHandlers.get(eventClass) != null) {
             HydrusEnchants.getInstance().getLogger().warning(
                     "Attempted to register EventHandler for the event '" + eventClass.getSimpleName() + "' in the '" + getClass().getSimpleName() + "' enchantment, but one was already present!");

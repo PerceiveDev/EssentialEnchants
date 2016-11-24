@@ -1,9 +1,17 @@
 package com.perceivedev.hydrusenchants.enchant;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
 import com.perceivedev.hydrusenchants.util.TextUtils;
@@ -16,8 +24,11 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
  */
 public class Enchants {
 
+    public static final String    IDENTIFIER     = "data-enchant:";
+    public static final String    ENCHANT_FORMAT = IDENTIFIER + "%s:%d;;";
+
     private List<String>          lore;
-    private Map<Enchant, Integer> enchants = new LinkedHashMap<>();
+    private Map<Enchant, Integer> enchants       = new LinkedHashMap<>();
 
     /**
      * Saves the lore to this object and then calls {@link #loadEnchants()}
@@ -25,7 +36,7 @@ public class Enchants {
      * @param lore the lore
      */
     private Enchants(List<String> lore) {
-        this.lore = lore;
+        this.lore = lore == null ? new ArrayList<>() : lore;
         loadEnchants();
     }
 
@@ -36,8 +47,39 @@ public class Enchants {
      * @return The loaded {@link Enchants} object
      */
     public static Enchants load(List<String> lore) {
-        Objects.requireNonNull(lore);
         return new Enchants(lore);
+    }
+
+    public List<String> getLore() {
+        return enchants.entrySet().stream().map(e -> String.format(ENCHANT_FORMAT, e.getKey().getIdentifier(), e.getValue()) +
+                ChatColor.GRAY + e.getKey().getDisplay() + " " + TextUtils.numeral(e.getValue())).collect(Collectors.toList());
+    }
+
+    public void apply(ItemStack item) {
+        clearEnchantData(item);
+        ItemMeta meta = item.getItemMeta();
+        meta.setLore(getLore());
+        item.setItemMeta(meta);
+    }
+
+    public static void clearEnchantData(ItemStack item) {
+        if (item == null || item.getType() == Material.AIR || !item.getItemMeta().hasLore()) {
+            return;
+        }
+
+        List<String> lore = item.getItemMeta().getLore();
+        Iterator<String> it = lore.iterator();
+        it.forEachRemaining(raw -> {
+            String s = TextUtils.unhideText(raw);
+            if (!s.matches(Pattern.quote(IDENTIFIER) + "[a-z_-]+:\\d+;;")) {
+                lore.remove(raw);
+            }
+        });
+
+        ItemMeta meta = item.getItemMeta();
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+
     }
 
     /**
@@ -45,16 +87,20 @@ public class Enchants {
      * is called by the constructor.
      */
     public void loadEnchants() {
-        lore.stream().forEach(this::loadEnchant);
+        lore.stream().forEach(this::parseEnchant);
     }
 
-    private void loadEnchant(String lore) {
+    private void parseEnchant(String lore) {
         lore = TextUtils.unhideText(lore);
+        if (!lore.startsWith(IDENTIFIER)) {
+            return;
+        }
+        lore = lore.substring(IDENTIFIER.length());
         String[] split = lore.split(";;");
         if (split.length < 1) {
             return;
         }
-        String[] data = TextUtils.unhideText(split[0]).split(":");
+        String[] data = split[0].split(":");
 
         if (data.length < 2) {
             return;
