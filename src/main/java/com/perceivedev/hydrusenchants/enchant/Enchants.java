@@ -49,7 +49,8 @@ public class Enchants {
     }
 
     private void loadEnchant(String lore) {
-        String[] split = lore.split("||");
+        lore = TextUtils.unhideText(lore);
+        String[] split = lore.split(";;");
         if (split.length < 1) {
             return;
         }
