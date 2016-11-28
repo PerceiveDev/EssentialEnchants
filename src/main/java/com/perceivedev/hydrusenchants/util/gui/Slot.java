@@ -44,4 +44,30 @@ public class Slot {
         return rawPosition() < size;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Slot) {
+            Slot slot = (Slot) obj;
+            return x == slot.getX() && y == slot.getY();
+        }
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return String.format("%d,%d", x, y);
+    }
+
 }

@@ -109,7 +109,8 @@ public abstract class Gui implements InventoryHolder {
         ClickEvent e = new ClickEvent(event);
         e.setCancelled(true);
 
-        Optional<Icon> icon = getIcon(e.getSlot(), e.getSlot() % 9);
+        Optional<Icon> icon = getIcon(e.getSlot() % 9, e.getSlot() / 9);
+
         if (icon.isPresent()) {
             e.setIcon(icon.get());
             icon.get().getHandler().onClick(e);
