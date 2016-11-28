@@ -7,6 +7,10 @@ import org.bukkit.ChatColor;
  */
 public class TextUtils {
 
+    public static String colorize(String input) {
+        return input == null ? null : ChatColor.translateAlternateColorCodes('&', input);
+    }
+
     public static String hideText(String input) {
         if (input == null || input.length() < 1) {
             return "";
