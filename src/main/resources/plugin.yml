@@ -4,9 +4,9 @@ version: 1.0.0
 description: A bukkit plugin
 author: [Rayzr]
 #depend: [PerceiveCore]
-#commands:
-#  hydrusenchants:
-#    description: HydrusEnchants main command
-#    aliases: [alias1,alias2]
-#    usage: "/hydrusenchants [command]"
-#    permission: HydrusEnchants.main
+commands:
+  hyrdusce:
+    description: HydrusEnchants main command
+    aliases: [hyrdusenchants,hce]
+    usage: "/hyrdusce [command]"
+    permission: HydrusEnchants.main

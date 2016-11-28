@@ -12,8 +12,8 @@ public class Slot {
     private int y;
 
     public Slot(int x, int y) {
-        Validate.isTrue(x > 0, "x can not be less than 0!");
-        Validate.isTrue(y > 0, "y can not be less than 0!");
+        Validate.isTrue(x >= 0, "x can not be less than 0!");
+        Validate.isTrue(y >= 0, "y can not be less than 0!");
         this.x = x;
         this.y = y;
     }

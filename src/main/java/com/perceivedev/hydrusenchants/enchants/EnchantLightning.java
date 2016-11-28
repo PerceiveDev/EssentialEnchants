@@ -9,6 +9,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import com.perceivedev.hydrusenchants.ItemType;
 import com.perceivedev.hydrusenchants.enchant.Enchant;
+import com.perceivedev.hydrusenchants.enchant.Rarity;
 import com.perceivedev.hydrusenchants.util.Markers;
 
 /**
@@ -67,6 +68,16 @@ public class EnchantLightning extends Enchant {
     @Override
     public int maxLevel() {
         return 1;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.perceivedev.hydrusenchants.enchant.Enchant#getRarity()
+     */
+    @Override
+    public Rarity getRarity() {
+        return Rarity.EPIC;
     }
 
     /*

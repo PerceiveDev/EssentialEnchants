@@ -15,6 +15,8 @@ import org.bukkit.plugin.EventExecutor;
 import com.perceivedev.hydrusenchants.HydrusEnchants;
 import com.perceivedev.hydrusenchants.ItemType;
 import com.perceivedev.hydrusenchants.util.EventHandler;
+import com.perceivedev.hydrusenchants.util.ItemFactory;
+import com.perceivedev.hydrusenchants.util.TextUtils;
 
 /**
  * @author Rayzr
@@ -40,14 +42,19 @@ public abstract class Enchant implements Listener, EventExecutor {
     public abstract String getIdentifier();
 
     /**
-     * @return The display name of this enchant
+     * @return The display name of this enchantment
      */
     public abstract String getDisplay();
 
     /**
-     * @return The maximum level possible to get of this enchant
+     * @return The maximum level possible to get of this enchantment
      */
     public abstract int maxLevel();
+
+    /**
+     * @return The rarity level of this enchantment
+     */
+    public abstract Rarity getRarity();
 
     /**
      * @return A list of applicable {@link ItemType item types}
@@ -56,7 +63,7 @@ public abstract class Enchant implements Listener, EventExecutor {
 
     /**
      * @param item the item to check
-     * @return If the item is enchanted with this enchant
+     * @return If the item is enchanted with this enchantment
      */
     public boolean isEnchanted(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
@@ -105,4 +112,17 @@ public abstract class Enchant implements Listener, EventExecutor {
         EventHandler eventHandler = eventHandlers.get(clazz);
         eventHandler.listen(event);
     }
+
+    /**
+     * @return
+     */
+    public ItemStack createBook() {
+        return ItemFactory.builder(Material.BOOK)
+                .setName(String.format("&2%s", getDisplay()))
+                .setLore(TextUtils.hideText("CUSTOM_ENCHANT_BOOK"),
+                        "&7Click an item to apply",
+                        "&7this enchant to it.")
+                .build();
+    }
+
 }

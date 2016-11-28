@@ -2,6 +2,7 @@ package com.perceivedev.hydrusenchants.enchant;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
 
@@ -37,5 +38,9 @@ public class EnchantManager {
      */
     public Enchant getEnchant(String identifier) {
         return enchants.get(identifier);
+    }
+
+    public Stream<Enchant> stream() {
+        return enchants.values().stream();
     }
 }
