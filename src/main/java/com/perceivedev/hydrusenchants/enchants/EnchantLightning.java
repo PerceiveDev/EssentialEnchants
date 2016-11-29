@@ -37,6 +37,7 @@ public class EnchantLightning extends Enchant {
                 return;
             }
             event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+            Markers.remove(event.getEntity(), getIdentifier());
         });
     }
 

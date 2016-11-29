@@ -14,6 +14,8 @@ public class Slot {
     public Slot(int x, int y) {
         Validate.isTrue(x >= 0, "x can not be less than 0!");
         Validate.isTrue(y >= 0, "y can not be less than 0!");
+        Validate.isTrue(x < 9, "x must be less than 9!");
+        Validate.isTrue(y < 6, "y must be less than 6!");
         this.x = x;
         this.y = y;
     }
@@ -42,6 +44,16 @@ public class Slot {
 
     public boolean fitsInside(int size) {
         return rawPosition() < size;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return x + y * 9;
     }
 
     /*

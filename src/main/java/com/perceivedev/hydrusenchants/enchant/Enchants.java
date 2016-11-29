@@ -51,7 +51,7 @@ public class Enchants {
     }
 
     public List<String> getLore() {
-        return enchants.entrySet().stream().map(e -> String.format(ENCHANT_FORMAT, e.getKey().getIdentifier(), e.getValue()) +
+        return enchants.entrySet().stream().map(e -> TextUtils.hideText(String.format(ENCHANT_FORMAT, e.getKey().getIdentifier(), e.getValue())) +
                 ChatColor.GRAY + e.getKey().getDisplay() + " " + TextUtils.numeral(e.getValue())).collect(Collectors.toList());
     }
 
@@ -133,6 +133,22 @@ public class Enchants {
     public int get(String identifier) {
         Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(identifier);
         return enchant == null ? -1 : enchants.getOrDefault(enchant, -1);
+    }
+
+    /**
+     * 
+     * @param enchant the enchant to modify
+     * @param level the level to set. If this is less than 0, it removes the
+     *            enchant instead of changing the level.
+     * @return The previous value of the enchant. This number may be 0.
+     */
+    public int set(Enchant enchant, int level) {
+        if (level < 0) {
+            return enchants.remove(enchant);
+        } else {
+            enchants.put(enchant, level);
+            return 0;
+        }
     }
 
 }

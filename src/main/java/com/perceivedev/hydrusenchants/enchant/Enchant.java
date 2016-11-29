@@ -24,7 +24,9 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
  */
 public abstract class Enchant implements Listener, EventExecutor {
 
-    private Map<Class<? extends Event>, EventHandler> eventHandlers = new HashMap<>();
+    public static final String                        ENCHANT_BOOK_IDENTIFIER = "CUSTOM_ENCHANT_BOOK:";
+
+    private Map<Class<? extends Event>, EventHandler> eventHandlers           = new HashMap<>();
 
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
@@ -60,6 +62,19 @@ public abstract class Enchant implements Listener, EventExecutor {
      * @return A list of applicable {@link ItemType item types}
      */
     public abstract List<ItemType> getApplicableItems();
+
+    /**
+     * @param item the item to check
+     * @return Whether or not this enchantment is applicable to that item
+     */
+    public boolean isApplicableTo(ItemStack item) {
+        for (ItemType type : getApplicableItems()) {
+            if (type.isValid(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param item the item to check
@@ -114,12 +129,12 @@ public abstract class Enchant implements Listener, EventExecutor {
     }
 
     /**
-     * @return
+     * @return a custom enchant book for this item
      */
     public ItemStack createBook() {
-        return ItemFactory.builder(Material.BOOK)
+        return ItemFactory.builder(Material.ENCHANTED_BOOK)
                 .setName(String.format("&2%s", getDisplay()))
-                .setLore(TextUtils.hideText("CUSTOM_ENCHANT_BOOK"),
+                .setLore(TextUtils.hideText(String.format("%s%s", ENCHANT_BOOK_IDENTIFIER, getIdentifier())),
                         "&7Click an item to apply",
                         "&7this enchant to it.")
                 .build();

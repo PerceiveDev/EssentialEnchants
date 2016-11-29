@@ -77,6 +77,7 @@ public class EnchantsGui extends Gui {
         }
 
         p.setTotalExperience(p.getTotalExperience() - requireXP);
+        p.setExp(0.0f);
         p.getInventory().addItem(item);
     }
 

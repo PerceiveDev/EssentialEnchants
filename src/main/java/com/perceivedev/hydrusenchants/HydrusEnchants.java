@@ -6,6 +6,7 @@ import com.perceivedev.hydrusenchants.cmd.CommandHydrusEnchants;
 import com.perceivedev.hydrusenchants.enchant.EnchantList;
 import com.perceivedev.hydrusenchants.enchant.EnchantManager;
 import com.perceivedev.hydrusenchants.enchant.EventManager;
+import com.perceivedev.hydrusenchants.event.InventoryListener;
 import com.perceivedev.hydrusenchants.util.gui.GuiListener;
 
 public class HydrusEnchants extends JavaPlugin {
@@ -24,6 +25,7 @@ public class HydrusEnchants extends JavaPlugin {
 
         getCommand("hyrdusce").setExecutor(new CommandHydrusEnchants());
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
         getLogger().info("Loading enchants:");
         // Static access so that it loads all the variables
