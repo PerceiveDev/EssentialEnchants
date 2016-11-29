@@ -31,10 +31,13 @@ public abstract class Enchant implements Listener, EventExecutor {
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
         HydrusEnchants.getInstance().getEnchantManager().registerEnchant(this);
-        HydrusEnchants.getInstance().getEventManager().add(this, targetEvents);
+        
+        if (targetEvents != null && targetEvents.length > 0) {
+            HydrusEnchants.getInstance().getEventManager().add(this, targetEvents);
 
-        for (Class<? extends Event> eventClass : targetEvents) {
-            eventHandlers.put(eventClass, null);
+            for (Class<? extends Event> eventClass : targetEvents) {
+                eventHandlers.put(eventClass, null);
+            }
         }
     }
 
@@ -77,21 +80,32 @@ public abstract class Enchant implements Listener, EventExecutor {
     }
 
     /**
+     * Get the level of this enchantment on the given item.
+     * 
      * @param item the item to check
-     * @return If the item is enchanted with this enchantment
+     * @return The level. This will return -1 if the item is not enchant with
+     *         this enchantment.
      */
-    public boolean isEnchanted(ItemStack item) {
+    public int getEnchantLevel(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
-            return false;
+            return -1;
         }
 
         if (!item.getItemMeta().hasLore()) {
-            return false;
+            return -1;
         }
 
         Enchants enchants = Enchants.load(item.getItemMeta().getLore());
 
-        return enchants.get(this) != -1;
+        return enchants.get(this);
+    }
+
+    /**
+     * @param item the item to check
+     * @return If the item is enchanted with this enchantment
+     */
+    public boolean isEnchanted(ItemStack item) {
+        return getEnchantLevel(item) > 0;
     }
 
     public void registerEventHandler(Class<? extends Event> eventClass, EventHandler handler) {

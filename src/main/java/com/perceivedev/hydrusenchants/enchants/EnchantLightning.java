@@ -36,7 +36,9 @@ public class EnchantLightning extends Enchant {
             if (!Markers.get(event.getEntity(), getIdentifier())) {
                 return;
             }
-            event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+            if (Math.random() <= 0.60) {
+                event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+            }
             Markers.remove(event.getEntity(), getIdentifier());
         });
     }
