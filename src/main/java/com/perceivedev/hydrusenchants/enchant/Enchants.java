@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
+import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 import com.perceivedev.hydrusenchants.util.TextUtils;
 
 /**
@@ -69,12 +70,14 @@ public class Enchants {
 
         List<String> lore = item.getItemMeta().getLore();
         Iterator<String> it = lore.iterator();
+        List<String> loreToRemove = new ArrayList<String>();
         it.forEachRemaining(raw -> {
             String s = TextUtils.unhideText(raw);
             if (!s.matches(Pattern.quote(IDENTIFIER) + "[a-z_-]+:\\d+;;")) {
-                lore.remove(raw);
+                loreToRemove.add(raw);
             }
         });
+        lore.remove(loreToRemove);
 
         ItemMeta meta = item.getItemMeta();
         meta.setLore(lore);

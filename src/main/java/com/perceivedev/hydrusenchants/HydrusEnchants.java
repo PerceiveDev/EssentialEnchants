@@ -31,9 +31,8 @@ public class HydrusEnchants extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
-        getLogger().info("Loading enchants:");
         // Static access so that it loads all the variables
-        EnchantList.printEnchants();
+        getLogger().info("Loading " + EnchantList.load());
     }
 
     @Override

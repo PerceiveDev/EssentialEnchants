@@ -10,8 +10,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
-import com.perceivedev.hydrusenchants.enchant.Enchant;
 import com.perceivedev.hydrusenchants.enchant.Enchants;
+import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 import com.perceivedev.hydrusenchants.util.TextUtils;
 
 /**

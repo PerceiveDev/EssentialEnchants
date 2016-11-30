@@ -8,8 +8,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import com.perceivedev.hydrusenchants.ItemType;
-import com.perceivedev.hydrusenchants.enchant.Enchant;
 import com.perceivedev.hydrusenchants.enchant.Rarity;
+import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 import com.perceivedev.hydrusenchants.util.Markers;
 
 /**

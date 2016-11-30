@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
-import com.perceivedev.hydrusenchants.enchant.Enchant;
 import com.perceivedev.hydrusenchants.enchant.Rarity;
+import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 import com.perceivedev.hydrusenchants.util.ItemFactory;
 import com.perceivedev.hydrusenchants.util.TextUtils;
 import com.perceivedev.hydrusenchants.util.gui.ClickEvent;

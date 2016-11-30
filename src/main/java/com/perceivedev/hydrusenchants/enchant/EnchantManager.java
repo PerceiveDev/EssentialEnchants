@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
+import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 
 /**
  * @author Rayzr

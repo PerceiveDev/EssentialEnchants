@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.enchant;
+package com.perceivedev.hydrusenchants.enchant.types;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +14,8 @@ import org.bukkit.plugin.EventExecutor;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
 import com.perceivedev.hydrusenchants.ItemType;
+import com.perceivedev.hydrusenchants.enchant.Enchants;
+import com.perceivedev.hydrusenchants.enchant.Rarity;
 import com.perceivedev.hydrusenchants.util.EventHandler;
 import com.perceivedev.hydrusenchants.util.ItemFactory;
 import com.perceivedev.hydrusenchants.util.TextUtils;

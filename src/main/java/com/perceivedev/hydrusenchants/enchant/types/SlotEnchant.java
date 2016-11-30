@@ -1,10 +1,12 @@
-package com.perceivedev.hydrusenchants.enchant;
+package com.perceivedev.hydrusenchants.enchant.types;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.perceivedev.hydrusenchants.HydrusEnchants;
+import com.perceivedev.hydrusenchants.enchant.ItemSlot;
+import com.perceivedev.hydrusenchants.enchant.PlayerTicker;
 
 /**
  * @author Rayzr
