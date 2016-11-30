@@ -31,7 +31,7 @@ public abstract class Enchant implements Listener, EventExecutor {
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
         HydrusEnchants.getInstance().getEnchantManager().registerEnchant(this);
-        
+
         if (targetEvents != null && targetEvents.length > 0) {
             HydrusEnchants.getInstance().getEventManager().add(this, targetEvents);
 
