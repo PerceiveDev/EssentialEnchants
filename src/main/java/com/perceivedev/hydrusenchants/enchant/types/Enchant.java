@@ -156,4 +156,13 @@ public abstract class Enchant implements Listener, EventExecutor {
                 .build();
     }
 
+    /**
+     * @param item the item to apply this enchant to
+     * @param level the level of this enchant on the item
+     * @return
+     */
+    public ItemStack apply(ItemStack item, int level) {
+        return item;
+    }
+
 }

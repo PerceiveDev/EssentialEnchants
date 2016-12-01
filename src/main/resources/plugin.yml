@@ -2,8 +2,7 @@ main: com.perceivedev.hydrusenchants.HydrusEnchants
 name: HydrusEnchants
 version: 1.0.0
 description: A bukkit plugin
-author: [Rayzr]
-#depend: [PerceiveCore]
+authors: [Rayzr, I Al Istannen]
 commands:
   hyrdusce:
     description: HydrusEnchants main command
