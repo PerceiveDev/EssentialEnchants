@@ -65,7 +65,7 @@ public class EnchantsGui extends Gui {
             return;
         }
 
-        ItemStack item = enchant.get().createBook();
+        ItemStack item = enchant.get().createBook(1 + (int) Math.round(Math.random() * (enchant.get().maxLevel() - 1)));
         if (!p.getInventory().containsAtLeast(item, 1) && p.getInventory().firstEmpty() < 0) {
             msg(p, "Your inventory is full!");
             return;

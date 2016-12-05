@@ -50,8 +50,8 @@ public abstract class PotionEnchant extends SlotEnchant {
 
     public static class PotionEnchantData {
 
-        private ItemSlot                   slot;
-        private PotionEffectType           type;
+        private ItemSlot slot;
+        private PotionEffectType type;
         private Function<Integer, Integer> amplifierCalculator;
 
         public PotionEnchantData(ItemSlot slot, PotionEffectType type, Function<Integer, Integer> amplifierCalculator) {

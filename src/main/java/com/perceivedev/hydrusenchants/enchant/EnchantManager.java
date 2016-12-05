@@ -16,7 +16,7 @@ public class EnchantManager {
     private Map<String, Enchant> enchants = new LinkedHashMap<>();
 
     @SuppressWarnings("unused")
-    private HydrusEnchants       plugin;
+    private HydrusEnchants plugin;
 
     public EnchantManager(HydrusEnchants plugin) {
         this.plugin = plugin;

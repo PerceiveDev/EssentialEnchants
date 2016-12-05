@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.enchants;
+package com.perceivedev.hydrusenchants.enchants.helmet;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,10 @@ import com.perceivedev.hydrusenchants.enchant.types.PotionEnchant;
 public class EnchantRage extends PotionEnchant {
 
     public EnchantRage() {
-        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.INCREASE_DAMAGE, lvl -> 1));
+        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.INCREASE_DAMAGE, lvl -> 1),
+                new PotionEnchantData(ItemSlot.CHESTPLATE, PotionEffectType.INCREASE_DAMAGE, lvl -> 1),
+                new PotionEnchantData(ItemSlot.LEGGINGS, PotionEffectType.INCREASE_DAMAGE, lvl -> 1),
+                new PotionEnchantData(ItemSlot.BOOTS, PotionEffectType.INCREASE_DAMAGE, lvl -> 1));
     }
 
     /*
@@ -68,7 +71,7 @@ public class EnchantRage extends PotionEnchant {
      */
     @Override
     public List<ItemType> getApplicableItems() {
-        return Arrays.asList(ItemType.HELMET);
+        return Arrays.asList(ItemType.ARMOR);
     }
 
 }

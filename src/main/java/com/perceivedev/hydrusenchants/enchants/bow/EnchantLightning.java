@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.enchants;
+package com.perceivedev.hydrusenchants.enchants.bow;
 
 import java.util.Arrays;
 import java.util.List;

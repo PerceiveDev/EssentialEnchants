@@ -31,7 +31,7 @@ import com.perceivedev.hydrusenchants.mininbt.ReflectionUtil.NameSpace;
  */
 public class EntityNBTUtil {
 
-    private static Method  loadFromNbtMethod, saveToNbtMethod, getHandle;
+    private static Method loadFromNbtMethod, saveToNbtMethod, getHandle;
     private static boolean error = false;
 
     static {

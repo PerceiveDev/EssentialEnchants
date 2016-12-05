@@ -26,11 +26,11 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
  */
 public class Enchants {
 
-    public static final String    IDENTIFIER     = "data-enchant:";
-    public static final String    ENCHANT_FORMAT = IDENTIFIER + "%s:%d;;";
+    public static final String IDENTIFIER = "data-enchant:";
+    public static final String ENCHANT_FORMAT = IDENTIFIER + "%s:%d;;";
 
-    private List<String>          lore;
-    private Map<Enchant, Integer> enchants       = new LinkedHashMap<>();
+    private List<String> lore;
+    private Map<Enchant, Integer> enchants = new LinkedHashMap<>();
 
     /**
      * Saves the lore to this object and then calls {@link #loadEnchants()}
@@ -57,14 +57,15 @@ public class Enchants {
                 ChatColor.GRAY + e.getKey().getDisplay() + " " + TextUtils.numeral(e.getValue())).collect(Collectors.toList());
     }
 
-    public void apply(ItemStack item) {
+    public ItemStack apply(ItemStack item) {
         clearEnchantData(item);
         ItemMeta meta = item.getItemMeta();
         meta.setLore(getLore());
+        item.setItemMeta(meta);
         for (Entry<Enchant, Integer> enchant : enchants.entrySet()) {
             item = enchant.getKey().apply(item, enchant.getValue());
         }
-        item.setItemMeta(meta);
+        return item;
     }
 
     public static void clearEnchantData(ItemStack item) {

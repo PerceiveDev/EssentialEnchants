@@ -18,7 +18,7 @@ public class EventManager implements Listener {
 
     private List<EventExecutor> listeners = new ArrayList<>();
 
-    private HydrusEnchants      plugin;
+    private HydrusEnchants plugin;
 
     /**
      * @param plugin the instance of {@link HydrusEnchants}

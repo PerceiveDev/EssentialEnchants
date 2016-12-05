@@ -22,7 +22,7 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
 public abstract class Gui implements InventoryHolder {
 
     private Map<Slot, Icon> slots = new LinkedHashMap<>();
-    private Inventory       inventory;
+    private Inventory inventory;
 
     public Gui(String title, int rows) {
         Validate.isTrue(rows > 0, "rows must be greater than 0!");

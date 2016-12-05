@@ -31,8 +31,8 @@ import com.perceivedev.hydrusenchants.mininbt.ReflectionUtil.MethodPredicate;
  */
 public class TileEntityNBTUtil {
 
-    private static Method         loadFromNBT, saveToNBT, getTileEntity;
-    private static boolean        error = false;
+    private static Method loadFromNBT, saveToNBT, getTileEntity;
+    private static boolean error = false;
 
     private static final Class<?> CRAFT_BLOCK_STATE_CLASS;
 

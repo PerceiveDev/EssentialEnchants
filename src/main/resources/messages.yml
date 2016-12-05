@@ -1,0 +1,3 @@
+prefix: "&8[&aHydrusEnchants&8]&2"
+
+enchant.failed.toHigh: "[[prefix]] The enchant could not be combined because it would result in too high of a level! ({0} + {1} > {3})"

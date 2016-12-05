@@ -724,7 +724,7 @@ public class ReflectionUtil {
          */
         OBC(Pattern.compile("\\{obc\\}\\.", Pattern.CASE_INSENSITIVE), string -> "org.bukkit.craftbukkit." + SERVER_VERSION + "." + string);
 
-        private Pattern                  detectionPattern;
+        private Pattern detectionPattern;
         private Function<String, String> resolverFunction;
 
         /**
@@ -803,9 +803,9 @@ public class ReflectionUtil {
      * @param <T> The class that is wrapped
      */
     public static class ReflectResponse<T> {
-        private T          value;
+        private T value;
         private ResultType resultType;
-        private Throwable  exception;
+        private Throwable exception;
 
         private ReflectResponse(T value, ResultType resultType, Throwable exception) {
             this.value = value;
@@ -933,8 +933,8 @@ public class ReflectionUtil {
      */
     public static class MemberPredicate<T extends Member> implements Predicate<T> {
 
-        private String               name;
-        private Collection<Modifier> modifiers       = Collections.emptyList();
+        private String name;
+        private Collection<Modifier> modifiers = Collections.emptyList();
         private Collection<Modifier> withoutModifier = Collections.emptyList();
 
         /**

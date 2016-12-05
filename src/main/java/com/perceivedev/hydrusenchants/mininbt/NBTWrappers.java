@@ -90,7 +90,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagString").get(), String.class)
                 .getValue();
 
-        private String                      string;
+        private String string;
 
         /**
          * @param string The String value
@@ -161,7 +161,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagCompound").get())
                 .getValue();
 
-        private Map<String, INBTBase>       map                          = new HashMap<>();
+        private Map<String, INBTBase> map = new HashMap<>();
 
         public void set(String key, INBTBase value) {
             map.put(key, value);
@@ -450,7 +450,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagList").get())
                 .getValue();
 
-        private List<INBTBase>              list                     = new ArrayList<>();
+        private List<INBTBase> list = new ArrayList<>();
 
         /**
          * Adds the {@link INBTBase}, if the type of the list is correct or the
@@ -646,7 +646,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagDouble").get(), double.class)
                 .getValue();
 
-        private double                      value;
+        private double value;
 
         /**
          * @param value The Double value
@@ -727,7 +727,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagInt").get(), int.class)
                 .getValue();
 
-        private int                         value;
+        private int value;
 
         /**
          * @param value The Int value
@@ -814,7 +814,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagIntArray").get(), int[].class)
                 .getValue();
 
-        private int[]                       value;
+        private int[] value;
 
         public NBTTagIntArray() {
         }
@@ -889,7 +889,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagByte").get(), byte.class)
                 .getValue();
 
-        private byte                        value;
+        private byte value;
 
         /**
          * @param value The Byte value
@@ -969,7 +969,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagByteArray").get(), byte[].class)
                 .getValue();
 
-        private byte[]                      value;
+        private byte[] value;
 
         public NBTTagByteArray() {
         }
@@ -1044,7 +1044,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagShort").get(), short.class)
                 .getValue();
 
-        private short                       value;
+        private short value;
 
         /**
          * @param value The Short value
@@ -1124,7 +1124,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagLong").get(), long.class)
                 .getValue();
 
-        private long                        value;
+        private long value;
 
         /**
          * @param value The Long value
@@ -1210,7 +1210,7 @@ public class NBTWrappers {
                         ReflectionUtil.getClass(NMS, "NBTTagFloat").get(), float.class)
                 .getValue();
 
-        private float                       value;
+        private float value;
 
         /**
          * @param value The Float value

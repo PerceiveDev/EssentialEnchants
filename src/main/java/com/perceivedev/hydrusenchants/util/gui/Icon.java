@@ -10,7 +10,7 @@ import com.perceivedev.hydrusenchants.util.ItemFactory;
  */
 public class Icon {
 
-    private ItemFactory  item;
+    private ItemFactory item;
     private ClickHandler handler;
 
     public Icon(ItemFactory item, ClickHandler handler) {

@@ -1,23 +1,23 @@
-package com.perceivedev.hydrusenchants.enchants;
+package com.perceivedev.hydrusenchants.enchants.helmet;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import com.perceivedev.hydrusenchants.ItemType;
+import com.perceivedev.hydrusenchants.enchant.ItemSlot;
 import com.perceivedev.hydrusenchants.enchant.Rarity;
-import com.perceivedev.hydrusenchants.enchant.types.Enchant;
-import com.perceivedev.hydrusenchants.util.Attributes;
+import com.perceivedev.hydrusenchants.enchant.types.PotionEnchant;
 
 /**
  * @author Rayzr
  *
  */
-public class EnchantFitness extends Enchant {
+public class EnchantGlow extends PotionEnchant {
 
-    public EnchantFitness() {
-
+    public EnchantGlow() {
+        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.NIGHT_VISION, lvl -> 0));
     }
 
     /*
@@ -27,7 +27,7 @@ public class EnchantFitness extends Enchant {
      */
     @Override
     public String getIdentifier() {
-        return "FITNESS";
+        return "GLOW";
     }
 
     /*
@@ -37,7 +37,7 @@ public class EnchantFitness extends Enchant {
      */
     @Override
     public String getDisplay() {
-        return "Fitness";
+        return "Glow";
     }
 
     /*
@@ -47,7 +47,7 @@ public class EnchantFitness extends Enchant {
      */
     @Override
     public int maxLevel() {
-        return 3;
+        return 1;
     }
 
     /*
@@ -57,7 +57,7 @@ public class EnchantFitness extends Enchant {
      */
     @Override
     public Rarity getRarity() {
-        return Rarity.LEGENDARY;
+        return Rarity.ULTRA;
     }
 
     /*
@@ -68,13 +68,6 @@ public class EnchantFitness extends Enchant {
     @Override
     public List<ItemType> getApplicableItems() {
         return Arrays.asList(ItemType.HELMET);
-    }
-
-    @Override
-    public ItemStack apply(ItemStack item, int level) {
-        item = Attributes.removeAttribute(item, "generic.maxHealth");
-        item = Attributes.addAttribute(item, "generic.maxHealth", 0, level);
-        return item;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.enchants;
+package com.perceivedev.hydrusenchants.enchants.chestplate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +14,11 @@ import com.perceivedev.hydrusenchants.enchant.types.PotionEnchant;
  * @author Rayzr
  *
  */
-public class EnchantConsumed extends PotionEnchant {
+public class EnchantTank extends PotionEnchant {
 
-    public EnchantConsumed() {
-        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.SATURATION, lvl -> 0));
+    public EnchantTank() {
+        super(new PotionEnchantData(ItemSlot.CHESTPLATE, PotionEffectType.DAMAGE_RESISTANCE, lvl -> lvl),
+                new PotionEnchantData(ItemSlot.LEGGINGS, PotionEffectType.DAMAGE_RESISTANCE, lvl -> lvl));
     }
 
     /*
@@ -27,7 +28,7 @@ public class EnchantConsumed extends PotionEnchant {
      */
     @Override
     public String getIdentifier() {
-        return "CONSUMED";
+        return "TANK";
     }
 
     /*
@@ -37,7 +38,7 @@ public class EnchantConsumed extends PotionEnchant {
      */
     @Override
     public String getDisplay() {
-        return "Consumed";
+        return "Tank";
     }
 
     /*
@@ -47,7 +48,7 @@ public class EnchantConsumed extends PotionEnchant {
      */
     @Override
     public int maxLevel() {
-        return 1;
+        return 3;
     }
 
     /*
@@ -68,7 +69,7 @@ public class EnchantConsumed extends PotionEnchant {
      */
     @Override
     public List<ItemType> getApplicableItems() {
-        return Arrays.asList(ItemType.HELMET);
+        return Arrays.asList(ItemType.CHESTPLATE, ItemType.LEGGINGS);
     }
 
 }

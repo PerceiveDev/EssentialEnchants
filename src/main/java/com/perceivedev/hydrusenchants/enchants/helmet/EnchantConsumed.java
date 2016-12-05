@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.enchants;
+package com.perceivedev.hydrusenchants.enchants.helmet;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,36 +14,36 @@ import com.perceivedev.hydrusenchants.enchant.types.PotionEnchant;
  * @author Rayzr
  *
  */
-public class EnchantGlow extends PotionEnchant {
+public class EnchantConsumed extends PotionEnchant {
 
-    public EnchantGlow() {
-        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.NIGHT_VISION, lvl -> 0));
+    public EnchantConsumed() {
+        super(new PotionEnchantData(ItemSlot.HELMET, PotionEffectType.SATURATION, lvl -> 0));
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.perceivedev.hydrusenchants.enchant.Enchant#getIdentifier()
+     * @see com.perceivedev.hydrusenchants.enchant.types.Enchant#getIdentifier()
      */
     @Override
     public String getIdentifier() {
-        return "GLOW";
+        return "CONSUMED";
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.perceivedev.hydrusenchants.enchant.Enchant#getDisplay()
+     * @see com.perceivedev.hydrusenchants.enchant.types.Enchant#getDisplay()
      */
     @Override
     public String getDisplay() {
-        return "Glow";
+        return "Consumed";
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.perceivedev.hydrusenchants.enchant.Enchant#maxLevel()
+     * @see com.perceivedev.hydrusenchants.enchant.types.Enchant#maxLevel()
      */
     @Override
     public int maxLevel() {
@@ -53,17 +53,18 @@ public class EnchantGlow extends PotionEnchant {
     /*
      * (non-Javadoc)
      * 
-     * @see com.perceivedev.hydrusenchants.enchant.Enchant#getRarity()
+     * @see com.perceivedev.hydrusenchants.enchant.types.Enchant#getRarity()
      */
     @Override
     public Rarity getRarity() {
-        return Rarity.ULTRA;
+        return Rarity.LEGENDARY;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.perceivedev.hydrusenchants.enchant.Enchant#getApplicableItems()
+     * @see
+     * com.perceivedev.hydrusenchants.enchant.types.Enchant#getApplicableItems()
      */
     @Override
     public List<ItemType> getApplicableItems() {

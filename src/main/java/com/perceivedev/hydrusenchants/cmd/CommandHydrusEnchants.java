@@ -34,7 +34,7 @@ public class CommandHydrusEnchants implements CommandExecutor {
                 usage(sender, command);
                 return true;
             }
-            msg(sender, "---------- THIS FEATURE HAS YET TO BE COMPLETED ----------");
+            msg(sender, "----- THIS FEATURE HAS YET TO BE COMPLETED -----");
         } else {
             usage(sender, command);
         }

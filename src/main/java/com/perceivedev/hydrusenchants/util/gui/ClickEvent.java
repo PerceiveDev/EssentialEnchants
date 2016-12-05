@@ -12,12 +12,12 @@ import org.bukkit.inventory.ItemStack;
 public class ClickEvent {
 
     private InventoryClickEvent raw;
-    private Icon                icon;
+    private Icon icon;
     /**
      * By default this is {@code false}. If set to {@code true}, the GUI will
      * close.
      */
-    private boolean             closeOnClick = false;
+    private boolean closeOnClick = false;
 
     public ClickEvent(InventoryClickEvent event) {
         raw = event;

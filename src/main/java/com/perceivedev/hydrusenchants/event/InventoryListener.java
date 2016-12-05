@@ -20,6 +20,12 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
  */
 public class InventoryListener implements Listener {
 
+    private HydrusEnchants plugin;
+
+    public InventoryListener(HydrusEnchants plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler(priority = EventPriority.LOW)
     public void onClick(InventoryClickEvent e) {
         if (e.getCursor() == null || e.getCursor().getType() != Material.ENCHANTED_BOOK) {
@@ -45,23 +51,40 @@ public class InventoryListener implements Listener {
             return;
         }
         data = data.substring(Enchant.ENCHANT_BOOK_IDENTIFIER.length());
+        if (data.indexOf(";") < 0) {
+            plugin.getLogger().warning("Invalid book! No level is specified!");
+            return;
+        }
 
         ItemStack item = e.getCurrentItem();
 
-        Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(data);
+        Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(data.split(";")[0]);
         if (enchant == null || !enchant.isApplicableTo(item)) {
             return;
         }
 
+        int enchantLevel = Integer.parseInt(data.split(";")[1]);
+        int current = -1;
         Enchants enchants = Enchants.load(item.getItemMeta().getLore());
-        if (enchants.get(enchant) > -1) {
-            return;
+
+        if ((current = enchants.get(enchant)) > -1) {
+            if (current + enchantLevel <= enchant.maxLevel()) {
+                enchants.set(enchant, current + enchantLevel);
+            } else {
+                e.getWhoClicked().sendMessage(plugin.tr("enchant.failed.toHigh",
+                        TextUtils.numeral(current),
+                        TextUtils.numeral(enchantLevel),
+                        TextUtils.numeral(current + enchantLevel),
+                        TextUtils.numeral(enchant.maxLevel())));
+                return;
+            }
+        } else {
+            enchants.set(enchant, enchantLevel);
         }
 
         e.setCancelled(true);
 
-        enchants.set(enchant, enchant.maxLevel());
-        enchants.apply(item);
+        item = enchants.apply(item);
 
         e.setCursor(null);
         e.setCurrentItem(item);

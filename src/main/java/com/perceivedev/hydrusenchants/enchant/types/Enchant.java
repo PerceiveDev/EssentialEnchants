@@ -26,9 +26,9 @@ import com.perceivedev.hydrusenchants.util.TextUtils;
  */
 public abstract class Enchant implements Listener, EventExecutor {
 
-    public static final String                        ENCHANT_BOOK_IDENTIFIER = "CUSTOM_ENCHANT_BOOK:";
+    public static final String ENCHANT_BOOK_IDENTIFIER = "CUSTOM_ENCHANT_BOOK:";
 
-    private Map<Class<? extends Event>, EventHandler> eventHandlers           = new HashMap<>();
+    private Map<Class<? extends Event>, EventHandler> eventHandlers = new HashMap<>();
 
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
@@ -147,10 +147,10 @@ public abstract class Enchant implements Listener, EventExecutor {
     /**
      * @return a custom enchant book for this item
      */
-    public ItemStack createBook() {
+    public ItemStack createBook(int level) {
         return ItemFactory.builder(Material.ENCHANTED_BOOK)
-                .setName(String.format("&2%s", getDisplay()))
-                .setLore(TextUtils.hideText(String.format("%s%s", ENCHANT_BOOK_IDENTIFIER, getIdentifier())),
+                .setName(String.format("&2%s %s", getDisplay(), TextUtils.numeral(level)))
+                .setLore(TextUtils.hideText(String.format("%s%s;%d", ENCHANT_BOOK_IDENTIFIER, getIdentifier(), level)),
                         "&7Click an item to apply",
                         "&7this enchant to it.")
                 .build();

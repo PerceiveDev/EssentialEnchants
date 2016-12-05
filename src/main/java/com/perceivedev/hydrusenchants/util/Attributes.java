@@ -10,7 +10,6 @@ import com.perceivedev.hydrusenchants.mininbt.ItemNBTUtil;
 import com.perceivedev.hydrusenchants.mininbt.NBTWrappers.INBTBase;
 import com.perceivedev.hydrusenchants.mininbt.NBTWrappers.NBTTagCompound;
 import com.perceivedev.hydrusenchants.mininbt.NBTWrappers.NBTTagList;
-import com.perceivedev.hydrusenchants.mininbt.NBTWrappers.NBTTagString;
 
 /**
  * @author Rayzr
@@ -18,7 +17,7 @@ import com.perceivedev.hydrusenchants.mininbt.NBTWrappers.NBTTagString;
  */
 public class Attributes {
 
-    public static ItemStack addAttribute(ItemStack itemStack, String attribute, int operation, double amount) {
+    public static ItemStack addAttribute(ItemStack itemStack, String attribute, int operation, double amount, AttributeSlot slot) {
         NBTTagCompound tag = ItemNBTUtil.getTag(itemStack);
         NBTTagList attributeModifiers = tag.hasKey("AttributeModifiers") ? (NBTTagList) tag.get("AttributeModifiers") : new NBTTagList();
 
@@ -30,7 +29,8 @@ public class Attributes {
         attr.setString("Name", attribute);
         attr.setInt("UUIDMost", (int) randomID.getMostSignificantBits());
         attr.setInt("UUIDLeast", (int) randomID.getLeastSignificantBits());
-        attr.setString("AttributeName", "generic.attackDamage");
+        attr.setString("AttributeName", attribute);
+        attr.setString("Slot", slot.getInternal());
 
         attributeModifiers.add(attr);
 
@@ -39,14 +39,15 @@ public class Attributes {
         return ItemNBTUtil.setNBTTag(tag, itemStack);
     }
 
-    public static ItemStack removeAttribute(ItemStack itemStack, String attribute) {
+    public static ItemStack removeAttribute(ItemStack itemStack, String attribute, AttributeSlot slot) {
         NBTTagCompound tag = ItemNBTUtil.getTag(itemStack);
         NBTTagList attributeModifiers = tag.hasKey("AttributeModifiers") ? (NBTTagList) tag.get("AttributeModifiers") : new NBTTagList();
 
         List<INBTBase> tagsToRemove = attributeModifiers.getRawList().stream()
                 .filter(nbt -> nbt instanceof NBTTagCompound)
                 .map(nbt -> (NBTTagCompound) nbt)
-                .filter(nbt -> nbt.hasKeyOfType("Name", NBTTagString.class) && nbt.getString("Name").equals(attribute))
+                .filter(nbt -> attribute.equals(nbt.getString("Name")))
+                .filter(nbt -> slot.getInternal().equals(nbt.getString("Slot")))
                 .collect(Collectors.toList());
 
         attributeModifiers.getRawList().removeAll(tagsToRemove);

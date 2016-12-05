@@ -1,5 +1,8 @@
 package com.perceivedev.hydrusenchants;
 
+import java.io.File;
+
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.perceivedev.hydrusenchants.cmd.CommandHydrusEnchants;
@@ -15,9 +18,10 @@ public class HydrusEnchants extends JavaPlugin {
 
     private static HydrusEnchants instance;
 
-    private EnchantManager        enchantManager;
-    private EventManager          eventManager;
-    private TickableManager       playerTicker;
+    private EnchantManager enchantManager;
+    private EventManager eventManager;
+    private TickableManager playerTicker;
+    private Language language = new Language();
 
     @Override
     public void onEnable() {
@@ -27,9 +31,19 @@ public class HydrusEnchants extends JavaPlugin {
         eventManager = new EventManager(this);
         playerTicker = new TickableManager(this, 30L);
 
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+
+        if (!getFile("messages.yml").exists()) {
+            saveResource("messages.yml", false);
+        }
+
+        language.load(getConfig("messages.yml"));
+
         getCommand("hyrdusce").setExecutor(new CommandHydrusEnchants());
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
-        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
 
         // Static access so that it loads all the variables
         getLogger().info("Loading " + EnchantList.load());
@@ -63,6 +77,32 @@ public class HydrusEnchants extends JavaPlugin {
      */
     public TickableManager getPlayerTicker() {
         return playerTicker;
+    }
+
+    /**
+     * @return the {@link Language} instance
+     */
+    public Language getLanguage() {
+        return language;
+    }
+
+    /**
+     * Alias for {@link Language#tr(String, Object...)}
+     * 
+     * @param key the key of the message
+     * @param formattingObjects the objects to format the message with
+     * @return The translated message
+     */
+    public String tr(String key, Object... formattingObjects) {
+        return language.tr(key, formattingObjects);
+    }
+
+    public File getFile(String path) {
+        return new File(getDataFolder(), path.replace('/', File.pathSeparatorChar));
+    }
+
+    public YamlConfiguration getConfig(String path) {
+        return YamlConfiguration.loadConfiguration(getFile(path));
     }
 
 }
