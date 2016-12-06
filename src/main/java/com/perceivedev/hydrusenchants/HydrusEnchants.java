@@ -11,7 +11,7 @@ import com.perceivedev.hydrusenchants.enchant.EnchantManager;
 import com.perceivedev.hydrusenchants.enchant.EventManager;
 import com.perceivedev.hydrusenchants.enchant.PlayerTicker;
 import com.perceivedev.hydrusenchants.enchant.TickableManager;
-import com.perceivedev.hydrusenchants.event.InventoryListener;
+import com.perceivedev.hydrusenchants.listeners.InventoryListener;
 import com.perceivedev.hydrusenchants.util.gui.GuiListener;
 
 public class HydrusEnchants extends JavaPlugin {

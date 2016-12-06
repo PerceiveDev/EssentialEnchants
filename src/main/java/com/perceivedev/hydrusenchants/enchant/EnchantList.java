@@ -10,6 +10,7 @@ import com.perceivedev.hydrusenchants.enchants.helmet.EnchantConsumed;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantFitness;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantGlow;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantRage;
+import com.perceivedev.hydrusenchants.enchants.leggings.EnchantInvisibility;
 
 /**
  * @author Rayzr
@@ -29,6 +30,9 @@ public class EnchantList {
     // Chestplate Enchants
     public static final Enchant REVIVAL = new EnchantRevival();
     public static final Enchant BOUNCE = new EnchantBounce();
+    
+    // Leggings Enchants
+    public static final Enchant INVISIBILITY = new EnchantInvisibility();
 
     // Chestplate & Leggings Enchants
     public static final Enchant TANK = new EnchantTank();

@@ -1,4 +1,4 @@
-package com.perceivedev.hydrusenchants.event;
+package com.perceivedev.hydrusenchants.listeners;
 
 import java.util.List;
 
