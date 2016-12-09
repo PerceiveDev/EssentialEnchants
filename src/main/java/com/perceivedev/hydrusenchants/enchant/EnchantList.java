@@ -18,6 +18,7 @@ import com.perceivedev.hydrusenchants.enchants.leggings.EnchantInvisibility;
 import com.perceivedev.hydrusenchants.enchants.leggings.EnchantRefuel;
 import com.perceivedev.hydrusenchants.enchants.leggings.EnchantVenom;
 import com.perceivedev.hydrusenchants.enchants.swords.EnchantBackstab;
+import com.perceivedev.hydrusenchants.enchants.swords.EnchantShockwave;
 
 /**
  * @author Rayzr
@@ -57,6 +58,7 @@ public class EnchantList {
 
 	// Sword Enchants
 	public static final Enchant BACKSTAB = new EnchantBackstab();
+	public static final Enchant SHOCKWAVE = new EnchantShockwave();
 
 	public static String load() {
 		return EnchantList.class.getSimpleName();
