@@ -72,31 +72,26 @@ public class EnchantBackstab extends Enchant {
 
 	@Override
 	public String getIdentifier() {
-		// TODO Auto-generated method stub
 		return "BACKSTAB";
 	}
 
 	@Override
 	public String getDisplay() {
-		// TODO Auto-generated method stub
 		return "Backstab";
 	}
 
 	@Override
 	public int maxLevel() {
-		// TODO Auto-generated method stub
 		return 3;
 	}
 
 	@Override
 	public Rarity getRarity() {
-		// TODO Auto-generated method stub
 		return Rarity.EPIC;
 	}
 
 	@Override
 	public List<ItemType> getApplicableItems() {
-		// TODO Auto-generated method stub
 		return Arrays.asList(ItemType.SWORD);
 	}
 

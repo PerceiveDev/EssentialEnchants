@@ -15,7 +15,7 @@ public enum ItemSlot {
     CHESTPLATE(p -> p.getChestplate()),
     LEGGINGS(p -> p.getLeggings()),
     BOOTS(p -> p.getBoots()),
-    HAND(p -> p.getItemInHand());
+	HAND(p -> p.getItemInMainHand());
 
     private final Function<PlayerInventory, ItemStack> itemGetter;
 

@@ -14,10 +14,12 @@ import com.perceivedev.hydrusenchants.enchants.helmet.EnchantConsumed;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantFitness;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantGlow;
 import com.perceivedev.hydrusenchants.enchants.helmet.EnchantRage;
+import com.perceivedev.hydrusenchants.enchants.leggings.EnchantDrained;
 import com.perceivedev.hydrusenchants.enchants.leggings.EnchantInvisibility;
 import com.perceivedev.hydrusenchants.enchants.leggings.EnchantRefuel;
 import com.perceivedev.hydrusenchants.enchants.leggings.EnchantVenom;
 import com.perceivedev.hydrusenchants.enchants.swords.EnchantBackstab;
+import com.perceivedev.hydrusenchants.enchants.swords.EnchantBurst;
 import com.perceivedev.hydrusenchants.enchants.swords.EnchantShockwave;
 
 /**
@@ -43,6 +45,7 @@ public class EnchantList {
 	public static final Enchant INVISIBILITY = new EnchantInvisibility();
 	public static final Enchant REFUEL = new EnchantRefuel();
 	public static final Enchant VENOM = new EnchantVenom();
+	public static final Enchant DRAINED = new EnchantDrained();
 
 	// Boots Enchants
 	public static final Enchant DASH = new EnchantDash();
@@ -59,6 +62,7 @@ public class EnchantList {
 	// Sword Enchants
 	public static final Enchant BACKSTAB = new EnchantBackstab();
 	public static final Enchant SHOCKWAVE = new EnchantShockwave();
+	public static final Enchant BURST = new EnchantBurst();
 
 	public static String load() {
 		return EnchantList.class.getSimpleName();
