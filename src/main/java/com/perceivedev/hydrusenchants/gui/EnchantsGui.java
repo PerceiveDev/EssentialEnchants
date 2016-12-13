@@ -23,11 +23,16 @@ import com.perceivedev.hydrusenchants.util.gui.Icon;
 public class EnchantsGui extends Gui {
 
     public EnchantsGui() {
-        super("&3Hydrus&9Enchants", 1);
+        super(HydrusEnchants.getInstance().tr("gui.title"), 1);
     }
 
     @Override
     protected void init() {
+        for (int i = 0; i < 9; i++) {
+            Icon filler = new Icon(ItemFactory.builder(Material.STAINED_GLASS_PANE).setDurability(7), null);
+            setIcon(i, 0, filler);
+        }
+
         Icon ultra = new Icon(ItemFactory
                 .builder(Material.STAINED_GLASS_PANE)
                 .setDurability(5)
@@ -94,7 +99,7 @@ public class EnchantsGui extends Gui {
     }
 
     private void takeXP(Player player, int xp) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:xp " + (xp < 0 ? "" : "-") + xp + player.getName());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:xp " + (xp < 0 ? "" : "-") + xp + " " + player.getName());
     }
 
 }
