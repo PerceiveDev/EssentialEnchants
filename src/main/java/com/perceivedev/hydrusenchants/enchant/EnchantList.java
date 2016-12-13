@@ -45,6 +45,9 @@ public class EnchantList {
     // Chestplate Enchants
     public static final Enchant REVIVAL = new EnchantRevival();
     public static final Enchant BOUNCE = new EnchantBounce();
+    
+    // Chestplate & Leggings Enchants
+    public static final Enchant TANK = new EnchantTank();
 
     // Leggings Enchants
     public static final Enchant INVISIBILITY = new EnchantInvisibility();
@@ -56,9 +59,6 @@ public class EnchantList {
     public static final Enchant DASH = new EnchantDash();
     public static final Enchant SPRING = new EnchantSpring();
     public static final Enchant FEATHER_WEIGHT = new EnchantFeatherWeight();
-
-    // Chestplate & Leggings Enchants
-    public static final Enchant TANK = new EnchantTank();
 
     // Bow Enchants
     public static final Enchant LIGHTNING = new EnchantLightning();
@@ -73,9 +73,14 @@ public class EnchantList {
     public static final Enchant VAMPIRIC = new EnchantVampiric();
 
     // Axe Enchants
-    public static final Enchant QUICKENED = new EnchantQuickened();
     public static final Enchant BEHEADING = new EnchantBeheading();
 
+    // Axe & Pickaxe enchants
+    public static final Enchant QUICKENED = new EnchantQuickened();
+    
+    // Pickaxe enchants
+    
+    
     public static String load() {
         return EnchantList.class.getSimpleName();
     }
