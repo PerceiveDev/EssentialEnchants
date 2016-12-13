@@ -12,71 +12,71 @@ import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 
 public class EnchantVampiric extends Enchant {
 
-	public EnchantVampiric() {
-		super(EntityDamageByEntityEvent.class);
+    public EnchantVampiric() {
+        super(EntityDamageByEntityEvent.class);
 
-		registerEventHandler(EntityDamageByEntityEvent.class, e -> {
-			EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
-			if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
-				return;
-			}
+        registerEventHandler(EntityDamageByEntityEvent.class, e -> {
+            EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
+            if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
+                return;
+            }
 
-			Player player = (Player) event.getDamager();
-			int level = getEnchantLevel(player.getInventory().getItemInMainHand());
-			if (level < 0) {
-				return;
-			}
+            Player player = (Player) event.getDamager();
+            int level = getEnchantLevel(player.getInventory().getItemInMainHand());
+            if (level < 0) {
+                return;
+            }
 
-			switch (level) {
-			case 1:
-				if (Math.random() < 0.45) {
-					addHealth(player, Math.min(event.getDamage(), 0.5));
-				}
-				break;
-			case 2:
-				if (Math.random() < 0.55) {
-					addHealth(player, Math.min(event.getDamage(), 1.0));
-				}
-				break;
-			case 3:
-				if (Math.random() < 0.65) {
-					addHealth(player, Math.min(event.getDamage(), 1.5));
-				}
-				break;
-			default:
-				break;
-			}
+            switch (level) {
+                case 1:
+                    if (Math.random() < 0.45) {
+                        addHealth(player, Math.min(event.getDamage(), 0.5));
+                    }
+                    break;
+                case 2:
+                    if (Math.random() < 0.55) {
+                        addHealth(player, Math.min(event.getDamage(), 1.0));
+                    }
+                    break;
+                case 3:
+                    if (Math.random() < 0.65) {
+                        addHealth(player, Math.min(event.getDamage(), 1.5));
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-		});
-	}
+        });
+    }
 
-	private void addHealth(Player player, double health) {
-		player.setHealth(Math.min(player.getMaxHealth(), health));
-	}
+    private void addHealth(Player player, double health) {
+        player.setHealth(Math.min(player.getMaxHealth(), health));
+    }
 
-	@Override
-	public String getIdentifier() {
-		return "VAMPIRIC";
-	}
+    @Override
+    public String getIdentifier() {
+        return "VAMPIRIC";
+    }
 
-	@Override
-	public String getDisplay() {
-		return "Vampiric";
-	}
+    @Override
+    public String getDisplay() {
+        return "Vampiric";
+    }
 
-	@Override
-	public int maxLevel() {
-		return 3;
-	}
+    @Override
+    public int maxLevel() {
+        return 3;
+    }
 
-	@Override
-	public Rarity getRarity() {
-		return Rarity.EPIC;
-	}
+    @Override
+    public Rarity getRarity() {
+        return Rarity.EPIC;
+    }
 
-	@Override
-	public List<ItemType> getApplicableItems() {
-		return Arrays.asList(ItemType.SWORD);
-	}
+    @Override
+    public List<ItemType> getApplicableItems() {
+        return Arrays.asList(ItemType.SWORD);
+    }
 
 }

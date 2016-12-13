@@ -14,71 +14,71 @@ import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 
 public class EnchantWilted extends Enchant {
 
-	public EnchantWilted() {
-		super(EntityDamageByEntityEvent.class);
+    public EnchantWilted() {
+        super(EntityDamageByEntityEvent.class);
 
-		registerEventHandler(EntityDamageByEntityEvent.class, e -> {
-			EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
-			if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
-				return;
-			}
-			Player player = (Player) event.getDamager();
-			int level = getEnchantLevel(player.getInventory().getItemInMainHand());
-			if (level < 0) {
-				return;
-			}
+        registerEventHandler(EntityDamageByEntityEvent.class, e -> {
+            EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
+            if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
+                return;
+            }
+            Player player = (Player) event.getDamager();
+            int level = getEnchantLevel(player.getInventory().getItemInMainHand());
+            if (level < 0) {
+                return;
+            }
 
-			Player target = (Player) event.getEntity();
+            Player target = (Player) event.getEntity();
 
-			switch (level) {
-			case 1:
-				if (Math.random() < 0.45) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 0));
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
-				}
-				break;
-			case 2:
-				if (Math.random() < 0.65) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 0));
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
-				}
-				break;
-			case 3:
-				if (Math.random() < 0.55) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 1));
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 1));
-				}
-				break;
-			default:
-				break;
-			}
+            switch (level) {
+                case 1:
+                    if (Math.random() < 0.45) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 0));
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
+                    }
+                    break;
+                case 2:
+                    if (Math.random() < 0.65) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 0));
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
+                    }
+                    break;
+                case 3:
+                    if (Math.random() < 0.55) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 1));
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 1));
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-		});
-	}
+        });
+    }
 
-	@Override
-	public String getIdentifier() {
-		return "WILTED";
-	}
+    @Override
+    public String getIdentifier() {
+        return "WILTED";
+    }
 
-	@Override
-	public String getDisplay() {
-		return "Wilted";
-	}
+    @Override
+    public String getDisplay() {
+        return "Wilted";
+    }
 
-	@Override
-	public int maxLevel() {
-		return 3;
-	}
+    @Override
+    public int maxLevel() {
+        return 3;
+    }
 
-	@Override
-	public Rarity getRarity() {
-		return Rarity.EPIC;
-	}
+    @Override
+    public Rarity getRarity() {
+        return Rarity.EPIC;
+    }
 
-	@Override
-	public List<ItemType> getApplicableItems() {
-		return Arrays.asList(ItemType.SWORD);
-	}
+    @Override
+    public List<ItemType> getApplicableItems() {
+        return Arrays.asList(ItemType.SWORD);
+    }
 
 }

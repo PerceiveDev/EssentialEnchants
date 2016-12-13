@@ -77,7 +77,7 @@ public class EnchantBeheading extends Enchant {
             }
 
             event.getDrops().add(entities.get(event.getEntityType()).apply(event.getEntity()));
-            
+
         });
     }
 

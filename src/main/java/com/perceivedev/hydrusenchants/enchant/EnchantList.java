@@ -45,7 +45,7 @@ public class EnchantList {
     // Chestplate Enchants
     public static final Enchant REVIVAL = new EnchantRevival();
     public static final Enchant BOUNCE = new EnchantBounce();
-    
+
     // Chestplate & Leggings Enchants
     public static final Enchant TANK = new EnchantTank();
 
@@ -75,12 +75,11 @@ public class EnchantList {
     // Axe Enchants
     public static final Enchant BEHEADING = new EnchantBeheading();
 
-    // Axe & Pickaxe enchants
+    // Axe, Pickaxe & Sword enchants
     public static final Enchant QUICKENED = new EnchantQuickened();
-    
+
     // Pickaxe enchants
-    
-    
+
     public static String load() {
         return EnchantList.class.getSimpleName();
     }

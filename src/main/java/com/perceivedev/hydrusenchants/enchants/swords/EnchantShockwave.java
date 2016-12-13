@@ -14,86 +14,86 @@ import com.perceivedev.hydrusenchants.enchant.types.Enchant;
 
 public class EnchantShockwave extends Enchant {
 
-	public EnchantShockwave() {
-		super(EntityDamageByEntityEvent.class);
+    public EnchantShockwave() {
+        super(EntityDamageByEntityEvent.class);
 
-		registerEventHandler(EntityDamageByEntityEvent.class, e -> {
-			EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
-			if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
-				return;
-			}
-			Player player = (Player) event.getDamager();
-			int level = getEnchantLevel(player.getInventory().getItemInMainHand());
-			if (level < 0) {
-				return;
-			}
+        registerEventHandler(EntityDamageByEntityEvent.class, e -> {
+            EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
+            if (!(event.getEntity() instanceof Player && event.getDamager() instanceof Player)) {
+                return;
+            }
+            Player player = (Player) event.getDamager();
+            int level = getEnchantLevel(player.getInventory().getItemInMainHand());
+            if (level < 0) {
+                return;
+            }
 
-			Player target = (Player) event.getEntity();
+            Player target = (Player) event.getEntity();
 
-			switch (level) {
-			case 1:
-				if (Math.random() < 0.55) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
-				}
-				if (Math.random() < 0.40) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 0));
-				}
-				if (Math.random() < 0.35) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 0));
-				}
-				break;
-			case 2:
-				if (Math.random() < 0.65) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
-				}
-				if (Math.random() < 0.50) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 0));
-				}
-				if (Math.random() < 0.45) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 0));
-				}
-				break;
-			case 3:
-				if (Math.random() < 0.60) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 1));
-				}
-				if (Math.random() < 0.45) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1));
-				}
-				if (Math.random() < 0.40) {
-					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 1));
-				}
-				break;
-			default:
-				break;
-			}
+            switch (level) {
+                case 1:
+                    if (Math.random() < 0.55) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
+                    }
+                    if (Math.random() < 0.40) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 0));
+                    }
+                    if (Math.random() < 0.35) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 0));
+                    }
+                    break;
+                case 2:
+                    if (Math.random() < 0.65) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0));
+                    }
+                    if (Math.random() < 0.50) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 0));
+                    }
+                    if (Math.random() < 0.45) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 0));
+                    }
+                    break;
+                case 3:
+                    if (Math.random() < 0.60) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 1));
+                    }
+                    if (Math.random() < 0.45) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1));
+                    }
+                    if (Math.random() < 0.40) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 1));
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-		});
-	}
+        });
+    }
 
-	@Override
-	public String getIdentifier() {
-		return "SHOCKWAVE";
-	}
+    @Override
+    public String getIdentifier() {
+        return "SHOCKWAVE";
+    }
 
-	@Override
-	public String getDisplay() {
-		return "Shockwave";
-	}
+    @Override
+    public String getDisplay() {
+        return "Shockwave";
+    }
 
-	@Override
-	public int maxLevel() {
-		return 3;
-	}
+    @Override
+    public int maxLevel() {
+        return 3;
+    }
 
-	@Override
-	public Rarity getRarity() {
-		return Rarity.LEGENDARY;
-	}
+    @Override
+    public Rarity getRarity() {
+        return Rarity.LEGENDARY;
+    }
 
-	@Override
-	public List<ItemType> getApplicableItems() {
-		return Arrays.asList(ItemType.SWORD);
-	}
+    @Override
+    public List<ItemType> getApplicableItems() {
+        return Arrays.asList(ItemType.SWORD);
+    }
 
 }
