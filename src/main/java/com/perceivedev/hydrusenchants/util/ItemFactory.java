@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.Validate;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.material.Colorable;
 
 /**
@@ -144,6 +147,52 @@ public class ItemFactory {
     public ItemFactory setMeta(ItemMeta meta) {
         item.setItemMeta(meta);
         return this;
+    }
+
+    /**
+     * Sets the {@link SkullType} of this item
+     * 
+     * @param type the {@link SkullType} to set for this item
+     * @return this {@link ItemFactory}
+     * @throws IllegalArgumentException if the item is not a
+     *             {@link Material#SKULL_ITEM skull item}
+     */
+    public ItemFactory setSkullType(SkullType type) {
+        Validate.isTrue(getMeta() instanceof SkullMeta, "item is not a skull!");
+        setDurability(type.ordinal());
+        return this;
+    }
+
+    /**
+     * Sets the owner of this item (only works on player heads, see
+     * {@link #setSkullType(SkullType)})
+     * 
+     * @param owner the name of the owner
+     * @return this {@link ItemFactory}
+     * @throws IllegalArgumentException if this is not a player head
+     */
+    public ItemFactory setSkullOwner(String owner) {
+        Validate.isTrue(getMeta() instanceof SkullMeta && item.getDurability() == SkullType.PLAYER.ordinal(), "item is not a player head!");
+        SkullMeta meta = (SkullMeta) getMeta();
+        meta.setOwner(owner);
+        setMeta(meta);
+        return this;
+    }
+
+    /**
+     * Sets the owner of this item (only works on player heads, see
+     * {@link #setSkullType(SkullType)})
+     * <br>
+     * <br>
+     * This calls {@link #setSkullOwner(OfflinePlayer)} with
+     * {@code owner.getName()} as the parameter
+     * 
+     * @param owner the owner of this item
+     * @return this {@link ItemFactory}
+     * @throws IllegalArgumentException if this is not a player head
+     */
+    public ItemFactory setSkullOwner(OfflinePlayer owner) {
+        return setSkullOwner(owner.getName());
     }
 
     /**

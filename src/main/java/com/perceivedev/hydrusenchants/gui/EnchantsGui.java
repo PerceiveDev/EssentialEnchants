@@ -2,6 +2,7 @@ package com.perceivedev.hydrusenchants.gui;
 
 import java.util.Optional;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -21,10 +22,6 @@ import com.perceivedev.hydrusenchants.util.gui.Icon;
  */
 public class EnchantsGui extends Gui {
 
-    /**
-     * @param title
-     * @param rows
-     */
     public EnchantsGui() {
         super("&3Hydrus&9Enchants", 1);
     }
@@ -53,7 +50,7 @@ public class EnchantsGui extends Gui {
         setIcon(6, 0, legendary);
     }
 
-    private void giveBook(ClickEvent e, Rarity targetRarity, int requireXP, String requireXPPretty) {
+    private void giveBook(ClickEvent e, Rarity targetRarity, int requiredXP, String prettyXP) {
         Player p = e.getPlayer();
 
         Optional<Enchant> enchant = HydrusEnchants.getInstance().getEnchantManager().stream()
@@ -71,13 +68,12 @@ public class EnchantsGui extends Gui {
             return;
         }
 
-        if (p.getTotalExperience() < requireXP) {
-            msg(p, "You don't have enough experience! You need at least " + requireXPPretty + " XP");
+        if (p.getTotalExperience() < requiredXP) {
+            msg(p, "You don't have enough experience! You need at least " + prettyXP + " XP, but you only have " + p.getTotalExperience());
             return;
         }
 
-        p.setTotalExperience(p.getTotalExperience() - requireXP);
-        p.setExp(0.0f);
+        takeXP(p, requiredXP);
         p.getInventory().addItem(item);
     }
 
@@ -95,6 +91,10 @@ public class EnchantsGui extends Gui {
 
     private void msg(Player player, String msg) {
         player.sendMessage(TextUtils.colorize("&8[&aHydrusEnchants&8]&2 " + msg));
+    }
+
+    private void takeXP(Player player, int xp) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:xp " + (xp < 0 ? "" : "-") + xp + player.getName());
     }
 
 }
