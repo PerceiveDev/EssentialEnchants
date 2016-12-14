@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 
 /**
@@ -18,11 +18,17 @@ public class EnchantManager {
 
     private Map<String, Enchant> enchants = new LinkedHashMap<>();
 
-    @SuppressWarnings("unused")
-    private HydrusEnchants plugin;
+    private EssentialEnchants plugin;
 
-    public EnchantManager(HydrusEnchants plugin) {
+    public EnchantManager(EssentialEnchants plugin) {
         this.plugin = plugin;
+
+    }
+
+    /**
+     * Loads the data from the configuration file
+     */
+    public void load() {
         YamlConfiguration config = plugin.getConfig("enchants.yml");
         for (String key : config.getKeys(false)) {
             Enchant enchant = enchants.get(key.toUpperCase().replace('-', '_'));

@@ -2,12 +2,11 @@ package com.perceivedev.essentialenchants.gui;
 
 import java.util.Optional;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.Rarity;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 import com.perceivedev.essentialenchants.util.ItemFactory;
@@ -23,7 +22,7 @@ import com.perceivedev.essentialenchants.util.gui.Icon;
 public class EnchantsGui extends Gui {
 
     public EnchantsGui() {
-        super(HydrusEnchants.getInstance().tr("gui.title"), 1);
+        super(EssentialEnchants.getInstance().tr("gui.title"), 1);
     }
 
     @Override
@@ -55,10 +54,22 @@ public class EnchantsGui extends Gui {
         setIcon(6, 0, legendary);
     }
 
+    private void onClickUltra(ClickEvent e) {
+        giveBook(e, Rarity.ULTRA, 37, "2.5k");
+    }
+
+    private void onClickEpic(ClickEvent e) {
+        giveBook(e, Rarity.EPIC, 48, "5k");
+    }
+
+    private void onClickLegendary(ClickEvent e) {
+        giveBook(e, Rarity.LEGENDARY, 63, "10k");
+    }
+
     private void giveBook(ClickEvent e, Rarity targetRarity, int requiredXP, String prettyXP) {
         Player p = e.getPlayer();
 
-        Optional<Enchant> enchant = HydrusEnchants.getInstance().getEnchantManager().stream()
+        Optional<Enchant> enchant = EssentialEnchants.getInstance().getEnchantManager().stream()
                 .filter(ench -> ench.getRarity() == targetRarity)
                 .reduce((a, b) -> Math.random() > 0.5 ? a : b);
 
@@ -73,33 +84,17 @@ public class EnchantsGui extends Gui {
             return;
         }
 
-        if (p.getTotalExperience() < requiredXP) {
-            msg(p, "You don't have enough experience! You need at least " + prettyXP + " XP, but you only have " + p.getTotalExperience());
+        if (p.getLevel() < requiredXP) {
+            msg(p, "You don't have enough experience! You need at least " + requiredXP + " levels, but you only have " + p.getLevel());
             return;
         }
 
-        takeXP(p, requiredXP);
+        p.setLevel(p.getLevel() - requiredXP);
         p.getInventory().addItem(item);
-    }
-
-    private void onClickUltra(ClickEvent e) {
-        giveBook(e, Rarity.ULTRA, 2500, "2.5k");
-    }
-
-    private void onClickEpic(ClickEvent e) {
-        giveBook(e, Rarity.EPIC, 5000, "5k");
-    }
-
-    private void onClickLegendary(ClickEvent e) {
-        giveBook(e, Rarity.LEGENDARY, 10000, "10k");
     }
 
     private void msg(Player player, String msg) {
         player.sendMessage(TextUtils.colorize("&8[&aHydrusEnchants&8]&2 " + msg));
-    }
-
-    private void takeXP(Player player, int xp) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:xp " + (xp < 0 ? "" : "-") + xp + " " + player.getName());
     }
 
 }

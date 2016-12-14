@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 import com.perceivedev.essentialenchants.gui.EnchantsGui;
 
@@ -16,9 +16,9 @@ import com.perceivedev.essentialenchants.gui.EnchantsGui;
  */
 public class CommandHydrusEnchants implements CommandExecutor {
 
-    private HydrusEnchants plugin;
+    private EssentialEnchants plugin;
 
-    public CommandHydrusEnchants(HydrusEnchants plugin) {
+    public CommandHydrusEnchants(EssentialEnchants plugin) {
         this.plugin = plugin;
     }
 
@@ -49,7 +49,7 @@ public class CommandHydrusEnchants implements CommandExecutor {
                 return true;
             }
 
-            Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(args[2]);
+            Enchant enchant = EssentialEnchants.getInstance().getEnchantManager().getEnchant(args[2]);
             if (enchant == null) {
                 sender.sendMessage(plugin.tr("command.enchant.notExist"));
                 return true;
@@ -77,7 +77,7 @@ public class CommandHydrusEnchants implements CommandExecutor {
     }
 
     private void usage(CommandSender sender, Command command) {
-        sender.sendMessage(plugin.tr("command.enchant.usage"));
+        sender.sendMessage(plugin.tr("command.enchant.usage").split("\n"));
     }
 
 }

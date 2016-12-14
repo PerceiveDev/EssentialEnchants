@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.bukkit.Material;
 import org.bukkit.event.Event;
@@ -12,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.EventExecutor;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.ItemType;
 import com.perceivedev.essentialenchants.enchant.Enchants;
 import com.perceivedev.essentialenchants.enchant.Rarity;
@@ -34,10 +35,10 @@ public abstract class Enchant implements EventExecutor {
 
     @SafeVarargs
     public Enchant(Class<? extends Event>... targetEvents) {
-        HydrusEnchants.getInstance().getEnchantManager().registerEnchant(this);
+        EssentialEnchants.getInstance().getEnchantManager().registerEnchant(this);
 
         if (targetEvents != null && targetEvents.length > 0) {
-            HydrusEnchants.getInstance().getEventManager().add(this, targetEvents);
+            EssentialEnchants.getInstance().getEventManager().add(this, targetEvents);
 
             for (Class<? extends Event> eventClass : targetEvents) {
                 eventHandlers.put(eventClass, null);
@@ -74,7 +75,7 @@ public abstract class Enchant implements EventExecutor {
      * @return the description of this enchant
      */
     public String getDescription() {
-        return description;
+        return TextUtils.colorize(description);
     }
 
     /**
@@ -130,12 +131,12 @@ public abstract class Enchant implements EventExecutor {
         Objects.requireNonNull(eventClass, "eventClass can not be null");
         Objects.requireNonNull(handler, "handler can not be null");
         if (!eventHandlers.containsKey(eventClass)) {
-            HydrusEnchants.getInstance().getLogger().warning(
+            EssentialEnchants.getInstance().getLogger().warning(
                     "Attempted to register EventHandler for the event '\" + eventClass.getSimpleName() + \"' in the '\" + getClass().getSimpleName() + \"' enchantment, but it was not one of the target events!");
             return;
         }
         if (eventHandlers.get(eventClass) != null) {
-            HydrusEnchants.getInstance().getLogger().warning(
+            EssentialEnchants.getInstance().getLogger().warning(
                     "Attempted to register EventHandler for the event '" + eventClass.getSimpleName() + "' in the '" + getClass().getSimpleName() + "' enchantment, but one was already present!");
             return;
         }
@@ -151,7 +152,7 @@ public abstract class Enchant implements EventExecutor {
         }
 
         if (eventHandlers.get(clazz) == null) {
-            HydrusEnchants.getInstance().getLogger()
+            EssentialEnchants.getInstance().getLogger()
                     .warning("The enchant '" + getIdentifier() + "' has the event '" + clazz.getSimpleName() + "' listed as a target class, but hasn't set up an event handler for it yet!");
             return;
         }
@@ -165,8 +166,12 @@ public abstract class Enchant implements EventExecutor {
      */
     public ItemStack createBook(int level) {
         return ItemFactory.builder(Material.ENCHANTED_BOOK)
-                .setName(String.format("&2%s %s", getDisplay(), TextUtils.numeral(level)))
+                .setName(String.format("&2%s &a%s", getDisplay(), TextUtils.numeral(level)))
                 .setLore(TextUtils.hideText(String.format("%s%s;%d", ENCHANT_BOOK_IDENTIFIER, getIdentifier(), level)),
+                        getDescription(),
+                        "",
+                        "&2Can be applied to:&a " + getApplicableItems().stream().map(ItemType::getDisplay).collect(Collectors.joining(", ")),
+                        "",
                         "&7Click an item to apply",
                         "&7this enchant to it.")
                 .build();

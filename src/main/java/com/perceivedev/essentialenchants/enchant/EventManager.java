@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.EventExecutor;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 
 /**
  * @author Rayzr
@@ -18,12 +18,12 @@ public class EventManager implements Listener {
 
     private List<EventExecutor> listeners = new ArrayList<>();
 
-    private HydrusEnchants plugin;
+    private EssentialEnchants plugin;
 
     /**
-     * @param plugin the instance of {@link HydrusEnchants}
+     * @param plugin the instance of {@link EssentialEnchants}
      */
-    public EventManager(HydrusEnchants plugin) {
+    public EventManager(EssentialEnchants plugin) {
         this.plugin = plugin;
     }
 

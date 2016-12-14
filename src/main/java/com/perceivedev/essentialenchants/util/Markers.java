@@ -4,7 +4,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 
 /**
  * @author Rayzr
@@ -14,13 +14,13 @@ public class Markers {
 
     public static void set(Entity entity, String id) {
         id = id.trim().toUpperCase();
-        entity.setMetadata("HydrusEnchants:" + id, new FixedMetadataValue(HydrusEnchants.getInstance(), true));
+        entity.setMetadata("EssentialEnchants:" + id, new FixedMetadataValue(EssentialEnchants.getInstance(), true));
     }
 
     public static boolean get(Entity entity, String id) {
         id = id.trim().toUpperCase();
         // Should be fool proof enough, right?
-        return entity.hasMetadata("HydrusEnchants:" + id);
+        return entity.hasMetadata("EssentialEnchants:" + id);
     }
 
     /**
@@ -28,8 +28,8 @@ public class Markers {
      * @param id the marker's identifier
      */
     public static boolean remove(Projectile entity, String id) {
-        if (entity.hasMetadata("HydrusEnchants:" + id)) {
-            entity.removeMetadata("HydrusEnchants:" + id, HydrusEnchants.getInstance());
+        if (entity.hasMetadata("EssentialEnchants:" + id)) {
+            entity.removeMetadata("EssentialEnchants:" + id, EssentialEnchants.getInstance());
             return true;
         }
         return false;

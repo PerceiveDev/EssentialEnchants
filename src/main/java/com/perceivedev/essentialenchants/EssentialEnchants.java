@@ -14,9 +14,9 @@ import com.perceivedev.essentialenchants.enchant.TickableManager;
 import com.perceivedev.essentialenchants.listeners.InventoryListener;
 import com.perceivedev.essentialenchants.util.gui.GuiListener;
 
-public class HydrusEnchants extends JavaPlugin {
+public class EssentialEnchants extends JavaPlugin {
 
-    private static HydrusEnchants instance;
+    private static EssentialEnchants instance;
 
     private EnchantManager enchantManager;
     private EventManager eventManager;
@@ -46,12 +46,14 @@ public class HydrusEnchants extends JavaPlugin {
 
         language.load(getConfig("messages.yml"));
 
-        getCommand("hyrdusce").setExecutor(new CommandHydrusEnchants(this));
+        getCommand("essentialenchants").setExecutor(new CommandHydrusEnchants(this));
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
 
         // Static access so that it loads all the variables
-        getLogger().info("Loading " + EnchantList.load());
+        EnchantList.load();
+
+        enchantManager.load();
     }
 
     @Override
@@ -59,7 +61,7 @@ public class HydrusEnchants extends JavaPlugin {
         instance = null;
     }
 
-    public static HydrusEnchants getInstance() {
+    public static EssentialEnchants getInstance() {
         return instance;
     }
 

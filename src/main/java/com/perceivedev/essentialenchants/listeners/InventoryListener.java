@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.Enchants;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 import com.perceivedev.essentialenchants.util.TextUtils;
@@ -20,9 +20,9 @@ import com.perceivedev.essentialenchants.util.TextUtils;
  */
 public class InventoryListener implements Listener {
 
-    private HydrusEnchants plugin;
+    private EssentialEnchants plugin;
 
-    public InventoryListener(HydrusEnchants plugin) {
+    public InventoryListener(EssentialEnchants plugin) {
         this.plugin = plugin;
     }
 
@@ -59,7 +59,7 @@ public class InventoryListener implements Listener {
 
         ItemStack item = e.getCurrentItem();
 
-        Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(data.split(";")[0]);
+        Enchant enchant = EssentialEnchants.getInstance().getEnchantManager().getEnchant(data.split(";")[0]);
         if (enchant == null || !enchant.isApplicableTo(item)) {
             return;
         }

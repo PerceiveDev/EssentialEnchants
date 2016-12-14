@@ -1,4 +1,4 @@
-prefix: '&8[&aHydrusEnchants&8]&2'
+prefix: '&8[&aEssentialEnchants&8]&2'
 
 command.onlyPlayers: '[[prefix]] &cOnly players can do that!'
 command.args.notEnough: '[[prefix]] &cNot enough arguments!' 
@@ -6,11 +6,10 @@ command.player.notExist: '[[prefix]] &cThat player doesn''t exist!'
 command.enchant.notExist: '[[prefix]] &cThat enchant doesn''t exist!'
 command.enchant.aboveMax: '[[prefix]] The level must be a number between 1 and the max enchant level! In this case, the max enchant level is {0}'
 
-command.enchant.usage: "
-&aUsage
-&7/enchants list
-&7/enchants give <player> <enchant> <level>
-"
+command.enchant.usage: |
+  &2Usage:
+  &7/enchants list
+  &7/enchants give <player> <enchant> <level>
 
 enchant.failed.toHigh: '[[prefix]] The enchant could not be combined because it would result in too high of a level! ({0} + {1} > {3})'
 

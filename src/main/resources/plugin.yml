@@ -1,5 +1,5 @@
-main: com.perceivedev.hydrusenchants.HydrusEnchants
-name: CustomEnchants
+main: com.perceivedev.essentialenchants.EssentialEnchants
+name: EssentialEnchants
 version: 1.0.0
 description: A bukkit plugin
 authors: [Rayzr, I Al Istannen]

@@ -14,7 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 import com.perceivedev.essentialenchants.util.TextUtils;
 
@@ -116,7 +116,7 @@ public class Enchants {
         if (!data[1].matches("\\d+")) {
             return;
         }
-        Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(data[0]);
+        Enchant enchant = EssentialEnchants.getInstance().getEnchantManager().getEnchant(data[0]);
         if (enchant == null) {
             return;
         }
@@ -139,7 +139,7 @@ public class Enchants {
      *         exist or if it wasn't found in this list of enchants
      */
     public int get(String identifier) {
-        Enchant enchant = HydrusEnchants.getInstance().getEnchantManager().getEnchant(identifier);
+        Enchant enchant = EssentialEnchants.getInstance().getEnchantManager().getEnchant(identifier);
         return enchant == null ? -1 : enchants.getOrDefault(enchant, -1);
     }
 

@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.perceivedev.essentialenchants.HydrusEnchants;
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.ItemSlot;
 import com.perceivedev.essentialenchants.enchant.PlayerTicker;
 
@@ -20,7 +20,7 @@ public abstract class SlotEnchant extends Enchant implements PlayerTicker {
     public SlotEnchant(ItemSlot... slots) {
         super(new Class[0]);
         this.slots = slots;
-        HydrusEnchants.getInstance().getPlayerTicker().addTicker(this);
+        EssentialEnchants.getInstance().getPlayerTicker().addTicker(this);
     }
 
     @Override

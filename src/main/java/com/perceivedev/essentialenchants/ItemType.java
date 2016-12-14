@@ -14,55 +14,55 @@ public enum ItemType {
     /**
      * Matches any type of pickaxe
      */
-    PICKAXE(i -> i.getType().name().endsWith("_PICKAXE")),
+    PICKAXE("Pickaxes", i -> i.getType().name().endsWith("_PICKAXE")),
     /**
      * Matches any type of sword
      */
-    SWORD(i -> i.getType().name().endsWith("_SWORD")),
+    SWORD("Swords", i -> i.getType().name().endsWith("_SWORD")),
     /**
      * Matches any type of shovel
      */
-    SHOVEL(i -> i.getType().name().endsWith("_SPADE")),
+    SHOVEL("Shovels", i -> i.getType().name().endsWith("_SPADE")),
     /**
      * Matches any type of axe
      */
-    AXE(i -> i.getType().name().endsWith("_AXE")),
+    AXE("Axes", i -> i.getType().name().endsWith("_AXE")),
     /**
      * Matches bows
      */
-    BOW(i -> i.getType() == Material.BOW),
+    BOW("Bows", i -> i.getType() == Material.BOW),
     /**
      * Matches any type of tool / weapon (excluding fishing rods)
      */
-    TOOLS(i -> PICKAXE.isValid(i) || SWORD.isValid(i) || SHOVEL.isValid(i) || AXE.isValid(i) || BOW.isValid(i)),
+    TOOLS("All tools", i -> PICKAXE.isValid(i) || SWORD.isValid(i) || SHOVEL.isValid(i) || AXE.isValid(i) || BOW.isValid(i)),
     /**
      * Matches fishing rods
      */
-    FISHING_ROD(i -> i.getType() == Material.FISHING_ROD),
+    FISHING_ROD("Fishing rods", i -> i.getType() == Material.FISHING_ROD),
     /**
      * Matches any type of helmet
      */
-    HELMET(i -> i.getType().name().endsWith("_HELMET")),
+    HELMET("Helmets", i -> i.getType().name().endsWith("_HELMET")),
     /**
      * Matches any type of chestplate
      */
-    CHESTPLATE(i -> i.getType().name().endsWith("_CHESTPLATE")),
+    CHESTPLATE("Chestplates", i -> i.getType().name().endsWith("_CHESTPLATE")),
     /**
      * Matches any type of leggings
      */
-    LEGGINGS(i -> i.getType().name().endsWith("_LEGGINGS")),
+    LEGGINGS("Leggings", i -> i.getType().name().endsWith("_LEGGINGS")),
     /**
      * Matches any type of boots
      */
-    BOOTS(i -> i.getType().name().endsWith("_BOOTS")),
+    BOOTS("Boots", i -> i.getType().name().endsWith("_BOOTS")),
     /**
      * Matches any type of armor
      */
-    ARMOR(i -> HELMET.isValid(i) || CHESTPLATE.isValid(i) || LEGGINGS.isValid(i) || BOOTS.isValid(i)),
+    ARMOR("All armor", i -> HELMET.isValid(i) || CHESTPLATE.isValid(i) || LEGGINGS.isValid(i) || BOOTS.isValid(i)),
     /**
      * Matches any of the item types listed
      */
-    ALL(i -> {
+    ALL("All", i -> {
         for (ItemType type : ItemType.values()) {
             if (!type.name().equals("ALL") && type.isValid(i)) {
                 return true;
@@ -71,9 +71,11 @@ public enum ItemType {
         return false;
     });
 
+    private final String display;
     private final Predicate<ItemStack> validator;
 
-    private ItemType(Predicate<ItemStack> validator) {
+    private ItemType(String display, Predicate<ItemStack> validator) {
+        this.display = display;
         this.validator = validator;
     }
 
@@ -85,5 +87,14 @@ public enum ItemType {
      */
     public boolean isValid(ItemStack item) {
         return validator.test(item);
+    }
+
+    /**
+     * Returns the display name of this {@link ItemType item type}
+     * 
+     * @return The display name
+     */
+    public String getDisplay() {
+        return display;
     }
 }
