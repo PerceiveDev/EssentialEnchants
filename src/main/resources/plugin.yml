@@ -1,11 +1,11 @@
 main: com.perceivedev.hydrusenchants.HydrusEnchants
-name: HydrusEnchants
+name: CustomEnchants
 version: 1.0.0
 description: A bukkit plugin
 authors: [Rayzr, I Al Istannen]
 commands:
-  hyrdusce:
-    description: HydrusEnchants main command
-    aliases: [hyrdusenchants,hce]
-    usage: "/hyrdusce [command]"
-    permission: HydrusEnchants.main
+  essentialenchants:
+    description: The EssentialEnchants main command
+    aliases: [ee,enchants,enchant]
+    usage: "\u00A7cSomething went horribly, terribly wrong!"
+    permission: CustomEnchants.main

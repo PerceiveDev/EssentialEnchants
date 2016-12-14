@@ -1,0 +1,54 @@
+rage:
+  description: '&cActivates permanent Strength. Rage is required on all armor.'
+fitness:
+  description: '&cGives a boost of hearts.'
+glow:
+  description: '&cGives permanent Night Vision.'
+burn:
+  description: '&cGives permanent Fire Resistance.'
+consumed:
+  description: '&cSaturates the hunger bar.'
+revival:
+  description: '&cHas a chance to spawn some Charged Creepers among death.'
+bounce:
+  description: '&cHas a chance to knockback an enemy far when low on hearts.'
+tank:
+  description: '&cGives permanent Resistance.'
+invisibility:
+  description: '&cHas a chance to activate invisibility for yourself, and cause nausea upon an opponent.'
+refuel:
+  description: '&cGives permanent Regeneration.'
+venom:
+  description: '&cHas a chance to inflict poison unto an opponent.'
+drained:
+  description: '&cHas a chance to inflict cause weakness unto an opponent.'
+dash:
+  description: '&cGives permanent Speed.'
+spring:
+  description: '&cGives permanent Jump Boost.'
+feather-weight:
+  description: '&cWill not take fall damage upon falling.'
+lightning:
+  description: '&cWhen you shoot an arrow. It has a chance to inflict lightning unto an opponent.'
+fireball:
+  description: '&cWhen you shoot an arrow. It has a chance to shoot a fireball at an opponent.'
+backstab:
+  description: '&cHas a chance to inflict slowness and nausea when the opponent is turned.'
+shockwave:
+  description: '&cHas a chance to inflict slowness, nausea, and mining fatigue to an opponent.'
+burst:
+  description: '&cHas a chance to inflict mining fatigue, and slowness to an enemy.'
+shocking:
+  description: '&cHas a chance to inflict lightning and nausea upon an opponent.'
+wilted:
+  description: '&cHas a chance to inflict Wither unto an opponent.'
+vampiric:
+  description: '&cHas a chance to inflict damage, and steal hearts.'
+quickened:
+  description: '&cGives permanent Haste.'
+smelter:
+  description: '&cAuto smelts ores when mined.'
+blast:
+  description: '&cHas an Area of Effect when mining.'
+obsidian-destroyer:
+  description: '&cWhen tap an obsidian, it automatically mines it.'
