@@ -64,7 +64,7 @@ public class EnchantBeheading extends Enchant {
                 return;
             }
 
-            if (!isEnchanted(player.getInventory().getItemInMainHand())) {
+            if (!isEnchanted(player.getItemInHand())) {
                 return;
             }
 

@@ -22,7 +22,8 @@ public class EnchantVampiric extends Enchant {
             }
 
             Player player = (Player) event.getDamager();
-            int level = getEnchantLevel(player.getInventory().getItemInMainHand());
+            @SuppressWarnings("deprecation")
+            int level = getEnchantLevel(player.getInventory().getItemInHand());
             if (level < 0) {
                 return;
             }

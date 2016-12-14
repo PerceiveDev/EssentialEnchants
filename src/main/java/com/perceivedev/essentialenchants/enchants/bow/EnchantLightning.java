@@ -18,6 +18,7 @@ import com.perceivedev.essentialenchants.util.Markers;
  */
 public class EnchantLightning extends Enchant {
 
+    @SuppressWarnings("deprecation")
     public EnchantLightning() {
         super(ProjectileLaunchEvent.class, ProjectileHitEvent.class);
         registerEventHandler(ProjectileLaunchEvent.class, e -> {
@@ -26,7 +27,7 @@ public class EnchantLightning extends Enchant {
                 return;
             }
             Player p = (Player) event.getEntity().getShooter();
-            if (!isEnchanted(p.getInventory().getItemInMainHand()) && !isEnchanted(p.getInventory().getItemInOffHand())) {
+            if (!isEnchanted(p.getItemInHand()) && !isEnchanted(p.getInventory().getItemInOffHand())) {
                 return;
             }
             Markers.set(event.getEntity(), getIdentifier());

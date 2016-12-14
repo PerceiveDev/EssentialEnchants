@@ -24,7 +24,8 @@ public class EnchantBackstab extends Enchant {
                 return;
             }
             Player player = (Player) event.getDamager();
-            int level = getEnchantLevel(player.getInventory().getItemInMainHand());
+            @SuppressWarnings("deprecation")
+            int level = getEnchantLevel(player.getItemInHand());
             if (level < 0) {
                 return;
             }

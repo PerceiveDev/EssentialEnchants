@@ -45,7 +45,8 @@ public class EnchantSmelter extends Enchant {
                 return;
             }
 
-            ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
+            @SuppressWarnings("deprecation")
+            ItemStack tool = event.getPlayer().getInventory().getItemInHand();
             if (!isEnchanted(tool)) {
                 return;
             }

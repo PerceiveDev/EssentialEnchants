@@ -12,6 +12,7 @@ import com.perceivedev.essentialenchants.enchant.types.Enchant;
 
 public class EnchantExperience extends Enchant {
 
+    @SuppressWarnings("deprecation")
     public EnchantExperience() {
         super(EntityDeathEvent.class);
 
@@ -22,7 +23,7 @@ public class EnchantExperience extends Enchant {
                 return;
             }
 
-            if (!isEnchanted(player.getInventory().getItemInMainHand())) {
+            if (!isEnchanted(player.getInventory().getItemInHand())) {
                 return;
             }
 

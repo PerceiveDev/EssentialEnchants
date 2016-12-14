@@ -45,7 +45,8 @@ public class EnchantObsidianDestroyer extends Enchant {
                 return;
             }
 
-            ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
+            @SuppressWarnings("deprecation")
+            ItemStack tool = event.getPlayer().getItemInHand();
             if (!isEnchanted(tool)) {
                 return;
             }

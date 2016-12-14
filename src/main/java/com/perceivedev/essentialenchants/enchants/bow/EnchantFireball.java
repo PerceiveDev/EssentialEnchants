@@ -20,6 +20,7 @@ import com.perceivedev.essentialenchants.enchant.types.Enchant;
  */
 public class EnchantFireball extends Enchant {
 
+    @SuppressWarnings("deprecation")
     public EnchantFireball() {
         super(ProjectileLaunchEvent.class);
 
@@ -29,7 +30,7 @@ public class EnchantFireball extends Enchant {
                 return;
             }
             Player p = (Player) event.getEntity().getShooter();
-            if (!isEnchanted(p.getInventory().getItemInMainHand())
+            if (!isEnchanted(p.getItemInHand())
                     && !isEnchanted(p.getInventory().getItemInOffHand())) {
                 return;
             }

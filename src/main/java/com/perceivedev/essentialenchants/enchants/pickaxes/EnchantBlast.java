@@ -40,7 +40,8 @@ public class EnchantBlast extends Enchant {
                 return;
             }
 
-            ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
+            @SuppressWarnings("deprecation")
+            ItemStack tool = event.getPlayer().getInventory().getItemInHand();
             int level = getEnchantLevel(tool);
             if (level < 0) {
                 return;
