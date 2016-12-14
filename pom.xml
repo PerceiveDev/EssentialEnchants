@@ -2,10 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.perceivedev</groupId>
-	<artifactId>hydrusenchants</artifactId>
+	<artifactId>essentialenchants</artifactId>
 	<version>1.0.0</version>
-	<name>HydrusEnchants</name>
-	<description>Some plugin description</description>
+	<name>EssentialEnchants</name>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
@@ -50,4 +49,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<description>A custom enchants plugin</description>
 </project>
