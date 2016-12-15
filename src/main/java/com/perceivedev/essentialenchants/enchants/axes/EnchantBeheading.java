@@ -44,7 +44,7 @@ public class EnchantBeheading extends Enchant {
                 e -> ItemFactory.builder(Material.SKULL_ITEM).setSkullType(SkullType.CREEPER).build());
 
         try {
-            EntityType.ENDER_DRAGON.ordinal();
+            EntityType.ENDER_DRAGON.name();
             entities.put(e -> e.getType() == EntityType.ENDER_DRAGON,
                     e -> ItemFactory.builder(Material.SKULL_ITEM).setSkullType(SkullType.DRAGON).build());
         } catch (EnumConstantNotPresentException e) {

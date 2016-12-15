@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 import com.perceivedev.essentialenchants.ItemType;
 import com.perceivedev.essentialenchants.enchant.Rarity;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
+import com.perceivedev.essentialenchants.util.OneDotEightUtils;
 
 /**
  * @author Rayzr
@@ -20,7 +21,6 @@ import com.perceivedev.essentialenchants.enchant.types.Enchant;
  */
 public class EnchantFireball extends Enchant {
 
-    @SuppressWarnings("deprecation")
     public EnchantFireball() {
         super(ProjectileLaunchEvent.class);
 
@@ -30,7 +30,7 @@ public class EnchantFireball extends Enchant {
                 return;
             }
             Player p = (Player) event.getEntity().getShooter();
-            if (!isEnchanted(p.getItemInHand())) {
+            if (!OneDotEightUtils.isHandEnchanted(p, this)) {
                 return;
             }
             Location loc = event.getEntity().getLocation().clone();

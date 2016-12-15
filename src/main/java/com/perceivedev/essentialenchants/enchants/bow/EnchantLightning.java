@@ -11,6 +11,7 @@ import com.perceivedev.essentialenchants.ItemType;
 import com.perceivedev.essentialenchants.enchant.Rarity;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 import com.perceivedev.essentialenchants.util.Markers;
+import com.perceivedev.essentialenchants.util.OneDotEightUtils;
 
 /**
  * @author Rayzr
@@ -18,7 +19,6 @@ import com.perceivedev.essentialenchants.util.Markers;
  */
 public class EnchantLightning extends Enchant {
 
-    @SuppressWarnings("deprecation")
     public EnchantLightning() {
         super(ProjectileLaunchEvent.class, ProjectileHitEvent.class);
         registerEventHandler(ProjectileLaunchEvent.class, e -> {
@@ -27,7 +27,7 @@ public class EnchantLightning extends Enchant {
                 return;
             }
             Player p = (Player) event.getEntity().getShooter();
-            if (!isEnchanted(p.getItemInHand())) {
+            if (!OneDotEightUtils.isHandEnchanted(p, this)) {
                 return;
             }
             Markers.set(event.getEntity(), getIdentifier());

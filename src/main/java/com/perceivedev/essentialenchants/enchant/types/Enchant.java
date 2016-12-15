@@ -166,7 +166,7 @@ public abstract class Enchant implements EventExecutor {
      */
     public ItemStack createBook(int level) {
         return ItemFactory.builder(Material.ENCHANTED_BOOK)
-                .setName(String.format("&2%s &ae%s", getDisplay(), TextUtils.numeral(level)))
+                .setName(String.format("&2%s &a%s", getDisplay(), TextUtils.numeral(level)))
                 .setLore(TextUtils.hideText(String.format("%s%s;%d", ENCHANT_BOOK_IDENTIFIER, getIdentifier(), level)),
                         getDescription(),
                         "",
