@@ -27,7 +27,7 @@ public class EnchantLightning extends Enchant {
                 return;
             }
             Player p = (Player) event.getEntity().getShooter();
-            if (!isEnchanted(p.getItemInHand()) && !isEnchanted(p.getInventory().getItemInOffHand())) {
+            if (!isEnchanted(p.getItemInHand())) {
                 return;
             }
             Markers.set(event.getEntity(), getIdentifier());
