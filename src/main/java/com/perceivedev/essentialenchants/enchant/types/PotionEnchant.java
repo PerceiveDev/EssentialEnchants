@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.perceivedev.essentialenchants.enchant.ItemSlot;
-import com.perceivedev.essentialenchants.util.OneDotEightUtils;
+import com.perceivedev.essentialenchants.util.Utils;
 
 /**
  * @author Rayzr
@@ -43,7 +43,7 @@ public abstract class PotionEnchant extends SlotEnchant {
         }
         int amplifier = data.getAmplifierCalculator().apply(level);
 
-        PotionEffect effect = OneDotEightUtils.getPotionEffect(player, data.getType());
+        PotionEffect effect = Utils.getPotionEffect(player, data.getType());
         if (effect != null && effect.getAmplifier() <= amplifier) {
             player.removePotionEffect(data.getType());
         }
