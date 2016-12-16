@@ -1,6 +1,8 @@
 package com.perceivedev.essentialenchants.gui;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -69,9 +71,9 @@ public class EnchantsGui extends Gui {
     private void giveBook(ClickEvent e, Rarity targetRarity, int requiredXP, String prettyXP) {
         Player p = e.getPlayer();
 
-        Optional<Enchant> enchant = EssentialEnchants.getInstance().getEnchantManager().stream()
-                .filter(ench -> ench.getRarity() == targetRarity)
-                .reduce((a, b) -> Math.random() > 0.5 ? a : b);
+        List<Enchant> valid = EssentialEnchants.getInstance().getEnchantManager().stream()
+                .filter(ench -> ench.getRarity() == targetRarity).collect(Collectors.toList());
+        Optional<Enchant> enchant = valid.size() < 1 ? Optional.empty() : Optional.of(valid.get((int) Math.floor(Math.random() * valid.size())));
 
         if (!enchant.isPresent()) {
             msg(p, "No enchants were found!");

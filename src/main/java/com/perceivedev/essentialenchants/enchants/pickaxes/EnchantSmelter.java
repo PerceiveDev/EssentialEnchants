@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import com.perceivedev.essentialenchants.ItemType;
 import com.perceivedev.essentialenchants.enchant.Rarity;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
+import com.perceivedev.essentialenchants.util.Utils;
 
 public class EnchantSmelter extends Enchant {
 
@@ -32,8 +35,15 @@ public class EnchantSmelter extends Enchant {
             if (!recipe.getInput().getType().isBlock()) {
                 return;
             }
-            smeltables.put(recipe.getInput(), recipe.getResult());
+            ItemStack input = Utils.fixDurability(recipe.getInput());
+            ItemStack result = Utils.fixDurability(recipe.getResult());
+            smeltables.put(input, result);
         });
+    }
+
+    private static Optional<ItemStack> findSmeltResult(ItemStack input) {
+        return smeltables.entrySet().stream().filter(k -> input.isSimilar(k.getKey()))
+                .map(k -> k.getValue()).findFirst();
     }
 
     public EnchantSmelter() {
@@ -53,14 +63,17 @@ public class EnchantSmelter extends Enchant {
 
             Block block = event.getBlock();
             Collection<ItemStack> items = block.getDrops(tool);
+            System.out.println("Items:\n- " + items.stream().map(i -> i.getType().name()).collect(Collectors.joining("\n- ")));
 
             List<ItemStack> filtered = new ArrayList<ItemStack>();
             boolean foundMatch = false;
 
             for (ItemStack item : items) {
-                if (smeltables.containsKey(item)) {
+                Optional<ItemStack> result = findSmeltResult(item);
+                if (result.isPresent()) {
                     foundMatch = true;
-                    filtered.add(smeltables.get(item));
+                    System.out.println("Adding: " + result.get().getType().name());
+                    filtered.add(result.get());
                 } else {
                     filtered.add(item);
                 }

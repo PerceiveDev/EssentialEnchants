@@ -15,6 +15,7 @@ import org.bukkit.plugin.EventExecutor;
 
 import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.ItemType;
+import com.perceivedev.essentialenchants.enchant.EnchantManager;
 import com.perceivedev.essentialenchants.enchant.Enchants;
 import com.perceivedev.essentialenchants.enchant.Rarity;
 import com.perceivedev.essentialenchants.util.EventHandler;
@@ -47,6 +48,11 @@ public abstract class Enchant implements EventExecutor {
     }
 
     /**
+     * Override this and return the internal identifier of the enchant. This can
+     * only included upper-case letters from A to Z, numbers and underscores. If
+     * there are any other characters in the identifier, the
+     * {@link EnchantManager} <i><b>WILL</b> yell at you.</i>
+     * 
      * @return The internal identifier of this enchant
      */
     public abstract String getIdentifier();

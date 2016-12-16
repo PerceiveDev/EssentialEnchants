@@ -33,7 +33,7 @@ public class Utils {
         try {
             EquipmentSlot.OFF_HAND.name();
             OFF_HAND = true;
-        } catch (EnumConstantNotPresentException e) {
+        } catch (NoSuchFieldError e) {
             // Ignore
         }
 
@@ -41,7 +41,7 @@ public class Utils {
         try {
             Material.TIPPED_ARROW.name();
             TIPPED_ARROWS = true;
-        } catch (EnumConstantNotPresentException e) {
+        } catch (NoSuchFieldError e) {
             // Ignore
         }
     }
@@ -164,6 +164,20 @@ public class Utils {
      */
     public static boolean consumeArrow(Player self) {
         return consumeFirst(self, it -> it != null && (it.getType() == Material.ARROW || (TIPPED_ARROWS && it.getType() == Material.TIPPED_ARROW)));
+    }
+
+    /**
+     * Fixes odd durabilities of {@link Short#MAX_VALUE} on items in recipes 
+     * @param item the {@link ItemStack} to fix the durability of
+     * @return The normalized item
+     */
+    public static ItemStack fixDurability(ItemStack item) {
+        if (item.getDurability() != Short.MAX_VALUE) {
+            return item.clone();
+        }
+        ItemStack fixed = item.clone();
+        fixed.setDurability((short) 0);
+        return fixed;
     }
 
 }
