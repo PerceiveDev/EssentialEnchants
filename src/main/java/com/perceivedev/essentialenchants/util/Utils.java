@@ -3,13 +3,19 @@
  */
 package com.perceivedev.essentialenchants.util;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +23,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.perceivedev.essentialenchants.EssentialEnchants;
 import com.perceivedev.essentialenchants.enchant.types.Enchant;
 
 /**
@@ -25,10 +32,16 @@ import com.perceivedev.essentialenchants.enchant.types.Enchant;
  */
 public class Utils {
 
+    private static String BUKKIT_VERSION;
+    private static MethodHandle ITEM_CAUSES_DROPS;
+
     private static boolean OFF_HAND = false;
     private static boolean TIPPED_ARROWS = false;
 
     static {
+        String[] versionSplit = Bukkit.getServer().getClass().getPackage().getName().split("\\.");
+        BUKKIT_VERSION = versionSplit[versionSplit.length - 1];
+
         // Hacky way to check if this server supports the off-hand slot
         try {
             EquipmentSlot.OFF_HAND.name();
@@ -43,6 +56,15 @@ public class Utils {
             TIPPED_ARROWS = true;
         } catch (NoSuchFieldError e) {
             // Ignore
+        }
+
+        try {
+            Class<?> CRAFTBLOCK = Class.forName("org.bukkit.craftbukkit." + BUKKIT_VERSION + ".block.CraftBlock");
+            Method base = CRAFTBLOCK.getDeclaredMethod("itemCausesDrops", ItemStack.class);
+            base.setAccessible(true);
+            ITEM_CAUSES_DROPS = MethodHandles.lookup().unreflect(base);
+        } catch (Exception e) {
+            EssentialEnchants.getInstance().getLogger().log(Level.SEVERE, "Failed to find the 'itemCausesDrops' method in CraftBlock!", e);
         }
     }
 
@@ -167,7 +189,8 @@ public class Utils {
     }
 
     /**
-     * Fixes odd durabilities of {@link Short#MAX_VALUE} on items in recipes 
+     * Fixes odd durabilities of {@link Short#MAX_VALUE} on items in recipes
+     * 
      * @param item the {@link ItemStack} to fix the durability of
      * @return The normalized item
      */
@@ -178,6 +201,22 @@ public class Utils {
         ItemStack fixed = item.clone();
         fixed.setDurability((short) 0);
         return fixed;
+    }
+
+    /**
+     * Checks if a certain block will drop any items when mined with the given
+     * tool
+     * 
+     * @param block the block to check
+     * @param tool the tool to use
+     * @return Whether or not the tool causes items to drop
+     */
+    public static boolean itemCausesDrops(Block block, ItemStack tool) {
+        try {
+            return (boolean) ITEM_CAUSES_DROPS.bindTo(block).invoke(tool);
+        } catch (Throwable e) {
+            return false;
+        }
     }
 
 }
