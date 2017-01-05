@@ -6,6 +6,6 @@ authors: [Rayzr, I Al Istannen]
 commands:
   essentialenchants:
     description: The EssentialEnchants main command
-    aliases: [ee,enchants,enchant]
+    aliases: [ee,enchants]
     usage: "\u00A7cSomething went horribly, terribly wrong!"
     permission: CustomEnchants.main

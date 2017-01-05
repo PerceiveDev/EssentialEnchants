@@ -71,7 +71,7 @@ public class EnchantFitness extends Enchant {
     public ItemStack apply(ItemStack item, int level) {
         return Attributes.addAttribute(
                 Attributes.removeAttribute(item, "generic.maxHealth", AttributeSlot.HEAD),
-                "generic.maxHealth", 0, Math.round(level * 6.66f), AttributeSlot.HEAD);
+                "generic.maxHealth", 0, Math.round(level * 3.33f), AttributeSlot.HEAD);
     }
 
 }
