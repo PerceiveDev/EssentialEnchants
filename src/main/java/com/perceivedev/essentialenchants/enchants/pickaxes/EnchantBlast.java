@@ -3,8 +3,10 @@ package com.perceivedev.essentialenchants.enchants.pickaxes;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -47,36 +49,54 @@ public class EnchantBlast extends Enchant {
         });
     }
 
+    @SuppressWarnings("deprecation")
     private void breakLater(BlockBreakEvent event, ItemStack tool, int level) {
         if (event.isCancelled())
             return;
-        if (!event.getPlayer().isOnline())
+        Player player = event.getPlayer();
+        if (!player.isOnline())
             return;
 
         Vector dir = event.getPlayer().getEyeLocation().getDirection();
-        int xmult = (int) Math.round(dir.getY() / 90) % 2;
-        int zmult = (xmult + 1) % 2;
+
+        int ymult = Math.abs(dir.getY()) > 0.9 ? 0 : 1;
+        int xmult = ymult == 0 ? 1 : (int) Math.round(dir.getX() + 1) % 2;
+        int zmult = ymult == 0 ? 1 : (xmult + 1) % 2;
+
+        int radius = level == 3 || level == 2 ? 2 : 1;
 
         Block base = event.getBlock();
 
-        int radius = level == 3 || level == 2 ? 2 : 1;
-        for (int h = -radius; h <= radius; h++) {
-            for (int v = -radius; v <= radius; v++) {
-                if (h == 0 && v == 0) {
-                    continue;
-                }
-                Block next = base.getRelative(h * xmult, v, h * zmult);
-                if (next == null) {
-                    continue;
-                }
-                if (level < 3 && next.getType() == Material.OBSIDIAN) {
-                    continue;
-                }
-                if (Utils.itemCausesDrops(next, tool)) {
-                    next.breakNaturally();
+        miner: {
+            for (int x = xmult == 0 ? radius : -radius; x <= radius; x++) {
+                for (int y = ymult == 0 ? radius : -radius; y <= radius; y++) {
+                    for (int z = zmult == 0 ? radius : -radius; z <= radius; z++) {
+                        if (x * xmult == 0 && y * ymult == 0 && z * zmult == 0) {
+                            continue;
+                        }
+                        Block next = base.getRelative(x * xmult, y * ymult, z * zmult);
+                        if (next == null) {
+                            continue;
+                        }
+                        if (level < 3 && next.getType() == Material.OBSIDIAN) {
+                            continue;
+                        }
+                        if (Utils.itemCausesDrops(next, tool)) {
+                            next.breakNaturally(tool);
+
+                            if (player.getGameMode() != GameMode.CREATIVE) {
+                                tool = Utils.damage(tool);
+                                if (tool == null) {
+                                    break miner;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
+
+        player.getInventory().setItemInHand(tool);
     }
 
     @Override

@@ -47,7 +47,7 @@ public abstract class PotionEnchant extends SlotEnchant {
         if (effect != null && effect.getAmplifier() <= amplifier) {
             player.removePotionEffect(data.getType());
         }
-        player.addPotionEffect(new PotionEffect(data.getType(), 31, amplifier));
+        player.addPotionEffect(new PotionEffect(data.getType(), 30, amplifier));
     }
 
     public static class PotionEnchantData {

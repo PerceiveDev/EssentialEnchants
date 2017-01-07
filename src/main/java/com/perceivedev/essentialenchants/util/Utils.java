@@ -16,6 +16,7 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -204,6 +205,48 @@ public class Utils {
     }
 
     /**
+     * Removes a certain amount of durability from an {@link ItemStack}, taking
+     * into account the {@link Enchantment#DURABILITY Unbreaking} enchantment.
+     * 
+     * @param item the item to damage
+     * @param amount the amount of durability to take from the item
+     * @return The modified item or <code>null</code> if the damage was enough
+     *         to break the item.
+     */
+    public static ItemStack damage(ItemStack item, int amount) {
+        if (item == null) {
+            return null;
+        }
+        Validate.isTrue(item.getDurability() + amount < Short.MAX_VALUE, "damage amount is too high!");
+
+        ItemStack newItem = item.clone();
+        int unbreaking = newItem.getEnchantmentLevel(Enchantment.DURABILITY);
+
+        // Account for Unbreaking (thank you Minecraft Wiki for the lovely
+        // formula!)
+        if (unbreaking > 0 && Math.random() > (100.0 / (unbreaking + 1)) / 100.0) {
+            return newItem;
+        }
+
+        newItem.setDurability((short) (newItem.getDurability() + amount));
+        return newItem.getDurability() > newItem.getType().getMaxDurability() ? null : newItem;
+    }
+
+    /**
+     * Removes a certain amount of durability from an {@link ItemStack}, taking
+     * into account the {@link Enchantment#DURABILITY Unbreaking} enchantment.
+     * This
+     * calls {@link #damage(ItemStack, int)} with an amount of <code>1</code>.
+     * 
+     * @param item the item to damage
+     * @return The modified item or <code>null</code> if the damage was enough
+     *         to break the item.
+     */
+    public static ItemStack damage(ItemStack item) {
+        return damage(item, 1);
+    }
+
+    /**
      * Checks if a certain block will drop any items when mined with the given
      * tool
      * 
@@ -217,6 +260,22 @@ public class Utils {
         } catch (Throwable e) {
             return false;
         }
+    }
+
+    /**
+     * @param level the level of fortune enchant
+     * @return The multiplier for item drops
+     */
+    public static int getFortuneMultiplier(int level) {
+        if (level < 1)
+            return 1;
+        double chance = level == 1 ? 0.33 : (level == 2 ? 0.25 : 0.2);
+        for (int i = 0; i < level; i++) {
+            if (Math.random() < chance) {
+                return i + 2;
+            }
+        }
+        return 1;
     }
 
 }
